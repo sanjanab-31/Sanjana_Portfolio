@@ -1,82 +1,110 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Link, Code, Trophy } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+
+const contactLinks = [
+  {
+    name: "EMAIL",
+    label: "sanjana.b0831@gmail.com",
+    link: "mailto:sanjana.b0831@gmail.com",
+  },
+  {
+    name: "LINKEDIN",
+    label: "Connect with me",
+    link: "https://www.linkedin.com/in/sanjana-0831s/",
+  },
+  {
+    name: "GITHUB",
+    label: "Explore my code",
+    link: "https://github.com/sanjanab-31",
+  },
+  {
+    name: "WHATSAPP",
+    label: "Say hello",
+    link: "https://wa.me/",
+  }
+];
+
+const ContactRow = ({ item, index }) => (
+  <motion.a
+    href={item.link}
+    target="_blank"
+    rel="noreferrer"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6, delay: index * 0.1 }}
+    className="group flex flex-col md:flex-row justify-between items-start md:items-center py-10 border-b border-white/10 hover:border-white/50 transition-colors duration-300 cursor-pointer"
+  >
+    <span className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-500 group-hover:text-white transition-colors duration-300 uppercase tracking-tighter mb-4 md:mb-0">
+      {item.name}
+    </span>
+    <div className="flex items-center gap-6 md:gap-8 w-full md:w-auto justify-between md:justify-end">
+      <span className="text-gray-400 font-light text-lg md:text-xl group-hover:text-white transition-colors duration-300">
+        {item.label}
+      </span>
+      <div className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300 shrink-0">
+        <ArrowUpRight className="w-6 h-6 group-hover:rotate-45 transition-transform duration-300" />
+      </div>
+    </div>
+  </motion.a>
+);
 
 const Contact = () => {
   return (
-    <footer className="relative pt-32 pb-12 px-6 md:px-12 lg:px-24 bg-[#0a0a0a] overflow-hidden">
+    <footer className="relative pt-32 pb-12 px-6 md:px-12 lg:px-24 bg-[#050505] overflow-hidden" id="contact">
       <div className="max-w-[1400px] mx-auto relative z-10">
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-32">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="font-display text-5xl md:text-7xl font-bold uppercase tracking-tight mb-8">
-              Let's <span className="text-outline">Connect</span>
-            </h2>
-            <p className="text-xl text-gray-400 font-light max-w-md mb-12">
-              Currently exploring freelancing opportunities and always open to discussing new projects, creative ideas or opportunities to be part of your visions.
-            </p>
-            
-            <a href="mailto:sanjana.b0831@gmail.com" className="inline-flex items-center gap-4 text-2xl md:text-3xl font-light hover:text-gray-300 transition-colors mb-12 group">
-              <Mail className="group-hover:scale-110 transition-transform" />
-              sanjana.b0831@gmail.com
-            </a>
-            
-            <div className="flex gap-6">
-              <a href="https://www.linkedin.com/in/sanjana-0831s/" target="_blank" rel="noreferrer" className="p-4 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all" aria-label="LinkedIn">
-                <Link size={24} />
-              </a>
-              <a href="https://github.com/sanjanab-31" target="_blank" rel="noreferrer" className="p-4 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all" aria-label="GitHub">
-                <Code size={24} />
-              </a>
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-16 xl:gap-8 mb-32">
+          
+          <div className="xl:col-span-5 flex flex-col justify-between">
+            <div>
+              <motion.h2 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="font-display text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter leading-[0.9] mb-8"
+              >
+                Let's <br/> <span className="text-outline">Collaborate</span>
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-xl text-gray-400 font-light max-w-md leading-relaxed"
+              >
+                Currently exploring freelancing opportunities and always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+              </motion.p>
             </div>
-          </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="border border-white/10 rounded-2xl p-8 md:p-12 bg-[#050505]"
-          >
-            <h3 className="text-2xl font-semibold mb-8 flex items-center gap-3 text-white">
-              <Trophy className="text-yellow-500" /> Achievements
-            </h3>
-            <ul className="space-y-6">
-              <li className="flex items-start gap-4">
-                <span className="text-2xl mt-1">🥇</span>
-                <div>
-                  <h4 className="text-lg text-white font-medium">Freshwarite Prelims</h4>
-                  <p className="text-gray-400 text-sm mt-1">First Prize in UI/UX Design at Sri Eshwar College of Engineering</p>
+            {/* Time / Availability indicator */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="mt-16 hidden xl:block"
+            >
+              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 bg-white/5">
+                <div className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                 </div>
-              </li>
-              <li className="flex items-start gap-4">
-                <span className="text-2xl mt-1">🥇</span>
-                <div>
-                  <h4 className="text-lg text-white font-medium">Design Showdown</h4>
-                  <p className="text-gray-400 text-sm mt-1">First Place in UI/UX Competition at Sri Eshwar College of Engineering</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-4">
-                <span className="text-2xl mt-1">🚀</span>
-                <div>
-                  <h4 className="text-lg text-white font-medium">Hack the Horizon</h4>
-                  <p className="text-gray-400 text-sm mt-1">Top 50 among 130+ teams</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-4">
-                <span className="text-2xl mt-1">🌟</span>
-                <div>
-                  <h4 className="text-lg text-white font-medium">Eureka! 2025</h4>
-                  <p className="text-gray-400 text-sm mt-1">Zonalist, Social Track, Eureka! 2025</p>
-                </div>
-              </li>
-            </ul>
-          </motion.div>
+                <p className="text-white text-sm font-medium tracking-widest uppercase">Available for work</p>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="xl:col-span-7 flex flex-col justify-center w-full">
+            <div className="flex flex-col w-full border-t border-white/10">
+              {contactLinks.map((item, index) => (
+                <ContactRow key={item.name} item={item} index={index} />
+              ))}
+            </div>
+          </div>
+
         </div>
 
         <div className="h-[1px] bg-white/10 w-full mb-8"></div>
@@ -88,8 +116,8 @@ const Contact = () => {
       </div>
       
       {/* Huge background text */}
-      <div className="absolute bottom-[-10%] left-0 w-full overflow-hidden flex justify-center pointer-events-none opacity-[0.03] select-none z-0">
-        <h1 className="font-display text-[25vw] font-black uppercase whitespace-nowrap">SANJANA</h1>
+      <div className="absolute bottom-[-10%] left-0 w-full overflow-hidden flex justify-center pointer-events-none opacity-[0.02] select-none z-0">
+        <h1 className="font-display text-[25vw] font-black uppercase whitespace-nowrap tracking-tighter">SANJANA</h1>
       </div>
     </footer>
   );

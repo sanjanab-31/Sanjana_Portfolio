@@ -59,7 +59,7 @@ const Skills = () => {
   const [activeCategory, setActiveCategory] = useState(skillCategories[0]);
 
   return (
-    <section className="relative py-32 px-6 md:px-12 lg:px-24 bg-[#030303] overflow-hidden" id="skills">
+    <section className="relative py-16 md:py-24 overflow-hidden" id="skills">
       {/* Dynamic Background Elements */}
       <div className="absolute top-1/4 right-0 w-[800px] h-[800px] bg-cyan-900/10 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[600px] h-[600px] bg-rose-900/10 rounded-full blur-[150px] pointer-events-none" />
@@ -67,7 +67,7 @@ const Skills = () => {
       {/* Subtle Grid Pattern overlay for texture */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
 
-      <div className="max-w-[1400px] mx-auto relative z-10 flex flex-col lg:flex-row gap-16 lg:gap-24">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 relative z-10 flex flex-col lg:flex-row gap-16 lg:gap-24">
         
         {/* Left Column: Headings & Categories */}
         <div className="w-full flex-1 flex flex-col">
@@ -76,7 +76,7 @@ const Skills = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-md self-start mb-8"
+            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-md self-start mb-6"
           >
             <Layers className="w-4 h-4 text-gray-400" />
             <span className="text-xs md:text-sm uppercase tracking-[0.2em] text-gray-300 font-medium">Expertise</span>
@@ -87,9 +87,9 @@ const Skills = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-display text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-white mb-6 whitespace-nowrap"
+            className="font-display text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white leading-none mb-6"
           >
-            Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">Arsenal</span>
+            Technical <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">Arsenal.</span>
           </motion.h2>
           
           <motion.p

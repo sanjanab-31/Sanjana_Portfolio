@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Mail } from 'lucide-react';
 
 const contactLinks = [
   {
@@ -52,21 +52,30 @@ const ContactRow = ({ item, index }) => (
 
 const Contact = () => {
   return (
-    <footer className="relative pt-32 pb-12 px-6 md:px-12 lg:px-24 bg-[#050505] overflow-hidden" id="contact">
-      <div className="max-w-[1400px] mx-auto relative z-10">
+    <footer className="relative pt-16 md:pt-24 pb-12 overflow-hidden" id="contact">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 relative z-10">
         
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-16 xl:gap-8 mb-32">
           
           <div className="xl:col-span-5 flex flex-col justify-between">
             <div>
-              <motion.h2 
-                initial={{ opacity: 0, x: -50 }}
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="font-display text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter leading-[0.9] mb-8"
+                className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/10 mb-6"
               >
-                Let's <br/> <span className="text-outline">Collaborate</span>
+                <Mail className="w-4 h-4 text-gray-400" />
+                <span className="text-xs md:text-sm uppercase tracking-[0.2em] text-gray-300 font-medium">Contact</span>
+              </motion.div>
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="font-display text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white leading-none mb-8"
+              >
+                Let's <br/> <span className="text-outline">Collaborate.</span>
               </motion.h2>
               <motion.p 
                 initial={{ opacity: 0, x: -50 }}
@@ -87,13 +96,7 @@ const Contact = () => {
               transition={{ duration: 1, delay: 0.5 }}
               className="mt-16 hidden xl:block"
             >
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 bg-white/5">
-                <div className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                </div>
-                <p className="text-white text-sm font-medium tracking-widest uppercase">Available for work</p>
-              </div>
+              
             </motion.div>
           </div>
 
@@ -116,8 +119,8 @@ const Contact = () => {
       </div>
       
       {/* Huge background text */}
-      <div className="absolute bottom-[-10%] left-0 w-full overflow-hidden flex justify-center pointer-events-none opacity-[0.02] select-none z-0">
-        <h1 className="font-display text-[25vw] font-black uppercase whitespace-nowrap tracking-tighter">SANJANA</h1>
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden flex justify-center pointer-events-none opacity-[0.05] text-white select-none z-0">
+        <h1 className="font-display text-[20vw] md:text-[25vw] font-black uppercase whitespace-nowrap tracking-wide leading-none mb-[-2%]">SANJANA</h1>
       </div>
     </footer>
   );

@@ -61,13 +61,13 @@ const Achievements = () => {
   };
 
   return (
-    <section className="relative py-32 bg-[#050505] overflow-hidden" id="achievements">
+    <section className="relative py-16 md:py-24 overflow-hidden" id="achievements">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[10%] right-[-5%] w-[40rem] h-[40rem] rounded-full bg-purple-900/10 blur-[120px]"></div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-12 lg:px-24 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 relative z-10">
         
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
@@ -87,7 +87,7 @@ const Achievements = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="font-display text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight"
+              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white leading-none"
             >
               Milestones <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">&</span> Accolades

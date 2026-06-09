@@ -65,7 +65,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[14vw] md:text-[12vw] lg:text-[11vw] font-normal uppercase text-outline z-10 m-0 p-0 -mt-[2vw] md:-mt-[3vw] whitespace-nowrap"
+            className="font-display text-[14vw] md:text-[12vw] lg:text-[11vw] font-normal uppercase text-outline z-10 m-0 p-0 whitespace-nowrap"
           >
             & UI/UX DESIGNER
           </motion.h1>

@@ -5,12 +5,14 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Achievements from './components/Achievements';
 import Contact from './components/Contact';
+import Founder from './components/Founder';
 
 function App() {
   return (
     <main className="bg-[#050505] min-h-screen text-gray-200 font-sans selection:bg-white selection:text-black">
       <Hero />
       <About />
+      <Founder />
       <Skills />
       <Projects />
       <Achievements />

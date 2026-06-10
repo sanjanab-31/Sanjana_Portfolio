@@ -7,22 +7,22 @@ const projects = [
   {
     id: "01",
     title: "Vanguard",
-    subtitle: "Youth Entrepreneur Network",
-    description: "A full-stack networking platform connecting founders, mentors, and incubators. Features include startup profile management, mentor–founder connection system, cohort-based programs, and real-time messaging.",
-    tech: ["React.js", "Node.js", "Express.js", "PostgreSQL", "Firebase Auth"]
+    subtitle: "Web-based Platform",
+    description: "A web-based platform developed to deliver efficient and user-focused digital solutions with a strong emphasis on functionality, performance, and user experience.",
+    tech: ["React.js", "Node.js", "MongoDB"]
   },
   {
     id: "02",
-    title: "ERP System",
-    subtitle: "School Management",
-    description: "A complete ERP platform for schools with multi-role access. Includes Admin, Teacher, Student, and Parent dashboards, attendance management, exams/marks system, and fee tracking.",
+    title: "School ERP System",
+    subtitle: "Full-Stack School Management",
+    description: "Features include Admin Dashboard, Teacher/Student/Parent Portals, Attendance, Examination & Marks Tracking, and Fee Management.",
     tech: ["React.js", "Tailwind CSS", "Node.js", "MongoDB"]
   },
   {
     id: "03",
     title: "Billing Software",
-    subtitle: "Invoice & Payment Management",
-    description: "Invoice and billing management system for businesses. Handles product management, invoice generation, payment tracking, and customer history.",
+    subtitle: "Invoice & Business Management",
+    description: "Features include Product Management, Invoice Generation, Customer Management, Payment Tracking, and Business Analytics.",
     tech: ["MongoDB", "Express.js", "React.js", "Node.js"]
   }
 ];

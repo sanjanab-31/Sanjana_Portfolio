@@ -44,7 +44,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-gray-400 text-lg md:text-xl font-light mb-6 md:mb-2 text-center flex items-center justify-center gap-2"
         >
-          <span className="text-2xl">👋</span> my name is Sanjana and I am a
+          <span className="text-2xl">👋</span> my name is Sanjana B and I am a
         </motion.p>
         
         {/* Massive Typography Group */}
@@ -70,6 +70,15 @@ const Hero = () => {
             & UI/UX DESIGNER
           </motion.h1>
 
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="text-emerald-400 font-medium tracking-widest uppercase text-sm md:text-base mt-4"
+          >
+            Co-Founder & CTO @ Technovanam
+          </motion.p>
+
         </div>
         
         {/* Footer info in Hero */}
@@ -82,8 +91,8 @@ const Hero = () => {
           <p className="text-gray-400 text-lg md:text-xl font-light">
             based in Coimbatore, India.
           </p>
-          <p className="max-w-md text-gray-500 text-sm md:text-base font-light text-center md:text-right">
-            Passionate about building responsive, user-friendly web applications and designing clean interfaces using modern design tools.
+          <p className="max-w-xl text-gray-500 text-sm md:text-base font-light text-center md:text-right">
+            Passionate about building impactful digital products, creating scalable web applications, intuitive user experiences, and innovative technology solutions that solve real-world problems.
           </p>
         </motion.div>
       </div>

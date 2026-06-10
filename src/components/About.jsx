@@ -38,14 +38,22 @@ const About = () => {
             className="space-y-8"
           >
             <p className="text-xl md:text-2xl font-light text-gray-300 leading-relaxed">
-              I am a B.E. Computer Science and Engineering student with a strong interest in <span className="text-white font-medium">Full-Stack Development</span> and <span className="text-white font-medium">UI/UX Design</span>.
+              I am currently pursuing a B.E. in Computer Science and Engineering, having developed strong expertise in <span className="text-white font-medium">Full-Stack Development</span> and <span className="text-white font-medium">UI/UX Design</span>.
             </p>
             <p className="text-lg text-gray-400 font-light leading-relaxed">
-              I enjoy building responsive, user-friendly web applications and designing clean interfaces using modern design tools. I have hands-on experience in developing full-stack applications using the MERN stack and working with databases like MongoDB, PostgreSQL, and Firebase.
+              I enjoy transforming ideas into fully functional products, from initial wireframes and prototypes to deployment and maintenance. Through continuous learning and hands-on experience, I strive to bridge the gap between technology, design, and business strategy.
             </p>
-            <p className="text-lg text-gray-400 font-light leading-relaxed">
-              I am currently exploring freelancing opportunities and aiming to grow as a tech entrepreneur by building impactful digital products.
-            </p>
+            
+            <div className="space-y-3 pt-2">
+              <h4 className="text-white font-medium tracking-wide">My interests include:</h4>
+              <ul className="grid grid-cols-1 gap-3 text-gray-400 font-light text-sm md:text-base">
+                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-white/50"></span> Full-Stack Web Development</li>
+                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-white/50"></span> User Interface & User Experience Design</li>
+                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-white/50"></span> Product Development</li>
+                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-white/50"></span> Startup Development & Entrepreneurship</li>
+                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-white/50"></span> Building Scalable Digital Products</li>
+              </ul>
+            </div>
           </motion.div>
 
           <div className="space-y-12">

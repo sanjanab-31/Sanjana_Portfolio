@@ -58,16 +58,7 @@ const Contact = () => {
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-16 xl:gap-8 mb-32">
           
           <div className="xl:col-span-5 flex flex-col justify-between">
-            <div>
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/10 mb-6"
-              >
-                <Mail className="w-4 h-4 text-gray-400" />
-                <span className="text-xs md:text-sm uppercase tracking-[0.2em] text-gray-300 font-medium">Contact</span>
-              </motion.div>
+            <div>               
               <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -114,13 +105,12 @@ const Contact = () => {
         
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 font-light">
           <p>&copy; {new Date().getFullYear()} Sanjana B. All rights reserved.</p>
-          <p>Designed & Built with React, Tailwind & Framer Motion</p>
         </div>
       </div>
       
       {/* Huge background text */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden flex justify-center pointer-events-none opacity-[0.05] text-white select-none z-0">
-        <h1 className="font-display text-[20vw] md:text-[25vw] font-black uppercase whitespace-nowrap tracking-wide leading-none mb-[-2%]">SANJANA</h1>
+        <h1 className="font-display text-[20vw] md:text-[25vw] font-bold uppercase whitespace-nowrap tracking-normal leading-none mb-[-2%]">SANJANA</h1>
       </div>
     </footer>
   );

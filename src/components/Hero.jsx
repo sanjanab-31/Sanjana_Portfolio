@@ -177,15 +177,6 @@ const AnimatedLetters = ({ text, className, style = {}, hoverStyle = {}, delay =
   );
 };
 
-/* ────────────────────────────────────
-   NAV SECTIONS
-   ──────────────────────────────────── */
-const navSections = [
-  { id: "home", label: "Home", num: "01" },
-  { id: "about", label: "About", num: "02" },
-  { id: "projects", label: "Projects", num: "03" },
-  { id: "contact", label: "Contact", num: "04" },
-];
 
 /* ════════════════════════════════════
    HERO COMPONENT
@@ -198,8 +189,6 @@ const Hero = () => {
   const heroOpacity = useTransform(scrollY, [0, 600], [1, 0]);
   const heroScale = useTransform(scrollY, [0, 600], [1, 0.95]);
 
-  const [activeNav, setActiveNav] = useState(0);
-  const [hoveredNav, setHoveredNav] = useState(null);
   const [currentTime, setCurrentTime] = useState('');
   const [roleIndex, setRoleIndex] = useState(0);
 
@@ -221,13 +210,6 @@ const Hero = () => {
     }, 3500);
     return () => clearInterval(interval);
   }, []);
-
-  const handleNavClick = (idx) => {
-    setActiveNav(idx);
-    const sectionIds = ['home', 'about', 'projects', 'contact'];
-    const el = document.getElementById(sectionIds[idx]);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <motion.section
@@ -331,56 +313,7 @@ const Hero = () => {
         </span>
       </motion.div>
 
-      {/* Left Edge — Vertical dot navigation rail */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.6 }}
-        className="fixed left-6 md:left-10 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-6"
-        onMouseLeave={() => setHoveredNav(null)}
-      >
-        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-white/5" />
-        {navSections.map((item, idx) => {
-          const isActive = activeNav === idx;
-          const isHovered = hoveredNav === idx;
-          return (
-            <div
-              key={item.id}
-              className="relative flex items-center gap-4 cursor-pointer group"
-              onMouseEnter={() => setHoveredNav(idx)}
-              onClick={() => handleNavClick(idx)}
-            >
-              <motion.div
-                className={`relative z-10 rounded-full border-2 transition-all duration-300 ${
-                  isActive
-                    ? 'w-3 h-3 bg-white border-white shadow-[0_0_12px_rgba(255,255,255,0.5)]'
-                    : isHovered
-                      ? 'w-2.5 h-2.5 bg-white/50 border-white/50'
-                      : 'w-2 h-2 bg-transparent border-white/20'
-                }`}
-                layout
-                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-              />
-              <AnimatePresence>
-                {isHovered && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -8, width: 0 }}
-                    animate={{ opacity: 1, x: 0, width: 'auto' }}
-                    exit={{ opacity: 0, x: -8, width: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute left-6 flex items-center gap-2 whitespace-nowrap overflow-hidden"
-                  >
-                    <span className="text-[10px] font-mono text-white/30">{item.num}</span>
-                    <span className="text-[11px] font-medium tracking-widest uppercase text-white">
-                      {item.label}
-                    </span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
-      </motion.div>
+
 
       {/* Right Edge — Vertical text */}
       <motion.div
@@ -412,7 +345,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="h-px w-8 md:w-16 bg-gradient-to-r from-transparent to-white/30 origin-left "
           />
-          <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.35em] text-gray-500">
+          <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.35em] text-gray-400">
             Hey, I'm Sanjana B — I build things
           </span>
           <motion.div
@@ -545,7 +478,7 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 2.3 + i * 0.15 }}
-                className="text-[9px] md:text-[10px] font-mono uppercase tracking-[0.2em] text-gray-600 hover:text-[#71d300] transition-colors duration-300 cursor-default"
+                className="text-[9px] md:text-[10px] font-mono uppercase tracking-[0.2em] text-gray-400 hover:text-[#71d300] transition-colors duration-300 cursor-default"
               >
                 {tech}
               </motion.span>

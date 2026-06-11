@@ -94,7 +94,7 @@ const Projects = () => {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const [terminalLogs, setTerminalLogs] = useState([]);
   const [isTerminalRunning, setIsTerminalRunning] = useState(false);
-  const terminalBottomRef = useRef(null);
+  const terminalContainerRef = useRef(null);
 
   // Auto-run terminal logic when project index changes in IDE theme
   useEffect(() => {
@@ -140,10 +140,10 @@ const Projects = () => {
     return () => clearInterval(interval);
   }, [selectedIdx, activeTheme]);
 
-  // Keep terminal scrolled to bottom
+  // Keep terminal scrolled to bottom without forcing page scroll
   useEffect(() => {
-    if (terminalBottomRef.current) {
-      terminalBottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (terminalContainerRef.current) {
+      terminalContainerRef.current.scrollTop = terminalContainerRef.current.scrollHeight;
     }
   }, [terminalLogs]);
 
@@ -502,7 +502,10 @@ const Projects = () => {
               </div>
 
               {/* Console Logs */}
-              <div className="flex-grow p-3 font-mono text-[11px] overflow-y-auto space-y-1 select-text selection:bg-white/10 scrollbar-thin">
+              <div 
+                ref={terminalContainerRef}
+                className="flex-grow p-3 font-mono text-[11px] overflow-y-auto space-y-1 select-text selection:bg-white/10 scrollbar-thin"
+              >
                 {terminalLogs.map((log, idx) => {
                   if (typeof log !== 'string') return null;
                   let colorClass = "text-gray-400";
@@ -528,7 +531,6 @@ const Projects = () => {
                 {isTerminalRunning && (
                   <span className="inline-block w-1.5 h-3 bg-white ml-0.5 animate-[pulse_1s_infinite]"></span>
                 )}
-                <div ref={terminalBottomRef} />
               </div>
             </div>
           </div>

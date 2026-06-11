@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&family=Michroma&family=Syncopate:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&family=Michroma&family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.cdnfonts.com/css/pineon');
 @import "tailwindcss";
 
 @theme {
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Anton', sans-serif;
+  --font-grotesk: 'Space Grotesk', sans-serif;
 }
 
 @layer base {
@@ -22,4 +23,119 @@
 .text-outline-hover:hover {
   color: white;
   -webkit-text-stroke: 0px transparent;
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ═══ HERO CREATIVE ANIMATIONS ═══ */
+
+/* Floating particle animation */
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+}
+
+/* Morphing blob */
+@keyframes morph-blob {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50% { border-radius: 50% 60% 30% 60% / 30% 50% 70% 50%; }
+  75% { border-radius: 40% 60% 50% 50% / 60% 30% 60% 40%; }
+}
+
+/* Rotating ring */
+@keyframes spin-slow {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from { transform: translate(-50%, -50%) rotate(360deg); }
+  to { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+/* Glitch text effect */
+@keyframes glitch-1 {
+  0%, 100% { clip-path: inset(0 0 90% 0); transform: translateX(0); }
+  20% { clip-path: inset(10% 0 60% 0); transform: translateX(-3px); }
+  40% { clip-path: inset(40% 0 30% 0); transform: translateX(3px); }
+  60% { clip-path: inset(60% 0 10% 0); transform: translateX(-2px); }
+  80% { clip-path: inset(80% 0 5% 0); transform: translateX(2px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { clip-path: inset(90% 0 0 0); transform: translateX(0); }
+  20% { clip-path: inset(60% 0 10% 0); transform: translateX(3px); }
+  40% { clip-path: inset(30% 0 40% 0); transform: translateX(-3px); }
+  60% { clip-path: inset(10% 0 60% 0); transform: translateX(2px); }
+  80% { clip-path: inset(5% 0 80% 0); transform: translateX(-2px); }
+}
+
+/* Horizontal scan line */
+@keyframes scanline {
+  0% { top: -5%; }
+  100% { top: 105%; }
+}
+
+/* Pulse ring for CTO badge */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Stagger reveal for letters */
+@keyframes letter-reveal {
+  0% { transform: translateY(120%) rotateX(-40deg); opacity: 0; }
+  100% { transform: translateY(0) rotateX(0deg); opacity: 1; }
+}
+
+/* Horizontal line expand */
+@keyframes line-expand {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+/* Orbit path for floating elements */
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+}
+
+.animate-morph-blob {
+  animation: morph-blob 12s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 25s linear infinite;
+}
+
+.animate-scanline {
+  animation: scanline 4s linear infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* Noise texture overlay */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
 }

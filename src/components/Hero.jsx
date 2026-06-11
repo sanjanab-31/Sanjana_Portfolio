@@ -110,6 +110,74 @@ const ParticleField = () => {
 
 
 /* ────────────────────────────────────
+   ANIMATED LETTERS COMPONENT
+   ──────────────────────────────────── */
+const AnimatedLetters = ({ text, className, style = {}, hoverStyle = {}, delay = 0 }) => {
+  const letters = Array.from(text);
+
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.03,
+        delayChildren: delay,
+      },
+    },
+  };
+
+  const child = {
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        type: 'spring',
+        damping: 15,
+        stiffness: 150,
+      },
+    },
+    hidden: {
+      opacity: 0,
+      y: 30,
+      scale: 0.8,
+      rotate: -5,
+    },
+  };
+
+  return (
+    <motion.span
+      variants={container}
+      initial="hidden"
+      animate="visible"
+      className={`inline-flex flex-wrap justify-center ${className || ''}`}
+    >
+      {letters.map((char, index) => (
+        <motion.span
+          key={index}
+          variants={child}
+          whileHover={{
+            y: -10,
+            scale: 1.15,
+            ...hoverStyle,
+            transition: { type: 'spring', stiffness: 400, damping: 10 },
+          }}
+          className="inline-block cursor-pointer select-none transition-shadow"
+          style={{
+            ...style,
+            display: char === ' ' ? 'inline' : 'inline-block',
+            marginRight: char === ' ' ? '0.25em' : '0',
+          }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+};
+
+/* ────────────────────────────────────
    NAV SECTIONS
    ──────────────────────────────────── */
 const navSections = [
@@ -369,19 +437,29 @@ const Hero = () => {
                 className="w-full flex flex-col items-center justify-center"
               >
                 <motion.div style={{ y: y1 }}>
-                  <h1 className="font-display text-[14vw] md:text-[12vw] lg:text-[10vw] font-normal uppercase leading-none text-white relative z-10">
-                    FULL-STACK
+                  <h1 className="font-display text-[14vw] md:text-[12vw] lg:text-[10vw] font-normal uppercase leading-none text-white relative z-10 flex flex-wrap justify-center">
+                    <AnimatedLetters
+                      text="FULL-STACK"
+                      style={{ color: '#ffffff' }}
+                      hoverStyle={{ color: '#71d300', textShadow: '0 0 25px rgba(113, 211, 0, 0.8)' }}
+                    />
                   </h1>
                 </motion.div>
                 <motion.div style={{ y: y2 }} className="mt-1 md:mt-3">
-                  <h1
-                    className="font-display text-[11vw] md:text-[10vw] lg:text-[8.5vw] font-normal uppercase leading-none relative z-10 cursor-default"
-                    style={{
-                      color: 'transparent',
-                      WebkitTextStroke: '2px rgba(255, 255, 255, 0.4)',
-                    }}
-                  >
-                    & UI/UX DESIGNER
+                  <h1 className="font-display text-[11vw] md:text-[10vw] lg:text-[8.5vw] font-normal uppercase leading-none relative z-10 cursor-default flex flex-wrap justify-center">
+                    <AnimatedLetters
+                      text="& UI/UX DESIGNER"
+                      style={{
+                        color: 'transparent',
+                        WebkitTextStroke: '2px rgba(255, 255, 255, 0.4)',
+                      }}
+                      hoverStyle={{
+                        color: '#ffffff',
+                        WebkitTextStroke: '2px rgba(255, 255, 255, 1)',
+                        textShadow: '0 0 25px rgba(255, 255, 255, 0.8)',
+                      }}
+                      delay={0.15}
+                    />
                   </h1>
                 </motion.div>
               </motion.div>
@@ -395,20 +473,35 @@ const Hero = () => {
                 className="w-full flex flex-col items-center justify-center"
               >
                 <motion.div style={{ y: y1 }}>
-                  <h1 className="font-display text-[12vw] md:text-[10vw] lg:text-[8.5vw] font-normal uppercase leading-none text-white relative z-10">
-                    CO-FOUNDER
-                    <span className="text-[#71d300]"> & CTO</span>
+                  <h1 className="font-display text-[12vw] md:text-[10vw] lg:text-[8.5vw] font-normal uppercase leading-none text-white relative z-10 flex flex-wrap justify-center">
+                    <AnimatedLetters
+                      text="CO-FOUNDER"
+                      style={{ color: '#ffffff' }}
+                      hoverStyle={{ color: '#71d300', textShadow: '0 0 25px rgba(113, 211, 0, 0.8)' }}
+                    />
+                    <AnimatedLetters
+                      text=" & CTO"
+                      style={{ color: '#71d300' }}
+                      hoverStyle={{ color: '#ffffff', textShadow: '0 0 25px rgba(255, 255, 255, 0.8)' }}
+                      delay={0.25}
+                    />
                   </h1>
                 </motion.div>
                 <motion.div style={{ y: y2 }} className="mt-1 md:mt-3">
-                  <h1
-                    className="font-display text-[9vw] md:text-[8vw] lg:text-[6.5vw] font-normal uppercase leading-none relative z-10 cursor-default"
-                    style={{
-                      color: 'transparent',
-                      WebkitTextStroke: '2px rgba(113, 211, 0, 0.4)',
-                    }}
-                  >
-                    @ TECHNOVANAM
+                  <h1 className="font-display text-[9vw] md:text-[8vw] lg:text-[6.5vw] font-normal uppercase leading-none relative z-10 cursor-default flex flex-wrap justify-center">
+                    <AnimatedLetters
+                      text="@ TECHNOVANAM"
+                      style={{
+                        color: 'transparent',
+                        WebkitTextStroke: '2px rgba(113, 211, 0, 0.4)',
+                      }}
+                      hoverStyle={{
+                        color: '#71d300',
+                        WebkitTextStroke: '2px rgba(113, 211, 0, 1)',
+                        textShadow: '0 0 25px rgba(113, 211, 0, 0.8)',
+                      }}
+                      delay={0.15}
+                    />
                   </h1>
                 </motion.div>
               </motion.div>

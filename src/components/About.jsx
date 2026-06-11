@@ -1,92 +1,208 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { GraduationCap, Code2, Sparkles } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  GraduationCap, 
+  MapPin, 
+  Sparkles, 
+  Briefcase,
+  ChevronRight,
+  User,
+  ArrowRight
+} from 'lucide-react';
 
 const About = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const education = [
+    {
+      index: '01',
+      title: 'B.E. Computer Science and Engineering',
+      institution: 'Sri Eshwar College of Engineering',
+      period: '2024 — 2028 (Expected)',
+      gpa: 'CGPA: 8.3 / 10',
+      highlights: [
+        'Specializing in advanced full-stack architectures and database systems.',
+        'Actively participating in developer chapters and innovation bootcamps.',
+        'Exploring the intersection of human-computer interaction and web performance.'
+      ]
+    },
+    {
+      index: '02',
+      title: 'Higher Secondary & SSLC',
+      institution: 'Dr. V. Genguswamy Naidu Matric Hr Sec School',
+      period: 'Graduated 2024',
+      gpa: 'HSC: 94% | SSLC: 97.8%',
+      highlights: [
+        'Maintained top-tier academic ranks with major emphasis on science and computing streams.',
+        'Participated in science exhibitions, coding drills, and algebraic reasoning challenges.',
+        'Graduated with distinctions in both primary and higher secondary levels.'
+      ]
+    }
+  ];
+
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden" id="about">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 relative z-10">
-        <div className="mb-20">
+    <section className="relative py-24 md:py-32 overflow-hidden bg-[#050505] noise-overlay" id="about">
+      {/* Background Gradients & Ambient Effects matching Hero theme */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/12 w-[400px] h-[400px] bg-[#71d300]/[0.03] rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/12 w-[400px] h-[400px] bg-violet-500/[0.02] rounded-full blur-[120px]" />
+      </div>
+
+      {/* Decorative Scanline detail matching Hero */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
+        <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#71d300]/10 to-transparent top-1/2" />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
+        
+        {/* HEADER SECTION - Elegant & Neat */}
+        <div className="border-b border-white/5 pb-10 mb-16">
           <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/10 mb-6"
+            className="flex items-center gap-2 text-[#71d300] mb-4"
           >
-            <Sparkles className="w-4 h-4 text-gray-400" />
-            <span className="text-xs md:text-sm uppercase tracking-[0.2em] text-gray-300 font-medium">Introduction</span>
+            <Sparkles className="w-4 h-4" />
+            <span className="text-xs uppercase tracking-wider font-mono font-medium">About Me</span>
           </motion.div>
           
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-display text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white leading-none"
+            className="font-grotesk text-3xl md:text-5xl font-light text-white tracking-normal leading-tight"
           >
-            About <br />
-            <span className="text-outline">Me.</span>
+            I bridge engineering precision <br className="hidden md:inline" />
+            with intuitive user experience.
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8"
-          >
-            <p className="text-xl md:text-2xl font-light text-gray-300 leading-relaxed">
-              I am currently pursuing a B.E. in Computer Science and Engineering, having developed strong expertise in <span className="text-white font-medium">Full-Stack Development</span> and <span className="text-white font-medium">UI/UX Design</span>.
-            </p>
-            <p className="text-lg text-gray-400 font-light leading-relaxed">
-              I enjoy transforming ideas into fully functional products, from initial wireframes and prototypes to deployment and maintenance. Through continuous learning and hands-on experience, I strive to bridge the gap between technology, design, and business strategy.
-            </p>
-            
-            <div className="space-y-3 pt-2">
-              <h4 className="text-white font-medium tracking-wide">My interests include:</h4>
-              <ul className="grid grid-cols-1 gap-3 text-gray-400 font-light text-sm md:text-base">
-                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-white/50"></span> Full-Stack Web Development</li>
-                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-white/50"></span> User Interface & User Experience Design</li>
-                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-white/50"></span> Product Development</li>
-                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-white/50"></span> Startup Development & Entrepreneurship</li>
-                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-white/50"></span> Building Scalable Digital Products</li>
-              </ul>
-            </div>
-          </motion.div>
-
-          <div className="space-y-12">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
+        {/* TWO COLUMN GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+          
+          {/* LEFT COLUMN: Concise Bio & Metadata */}
+          <div className="lg:col-span-5 space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="border border-white/10 p-8 rounded-2xl bg-white/[0.02] backdrop-blur-sm relative overflow-hidden group"
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-gray-300 font-light leading-relaxed text-base md:text-lg"
             >
-              <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                <GraduationCap size={100} />
+              <p>
+                Focusing on holistic product architecture, I build clean frontend interfaces and efficient backend logic. I treat code as a medium to create digital systems that are both highly performant and aesthetically premium.
+              </p>
+            </motion.div>
+
+            {/* Concise metadata list */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="pt-6 border-t border-white/5 space-y-4 font-grotesk"
+            >
+              <div className="flex items-center gap-3">
+                <MapPin className="w-4 h-4 text-[#71d300] shrink-0" />
+                <span className="text-xs text-gray-500 uppercase tracking-wider">Location:</span>
+                <span className="text-white text-sm font-light">Coimbatore, India</span>
               </div>
-              <h3 className="text-2xl font-semibold mb-6 flex items-center gap-3">
-                <GraduationCap className="text-gray-400" /> Education
-              </h3>
-              
-              <div className="space-y-6 relative z-10">
-                <div>
-                  <h4 className="text-xl text-white font-medium">B.E. Computer Science and Engineering</h4>
-                  <p className="text-gray-400 mt-1">Sri Eshwar College of Engineering &bull; <span className="text-gray-500">Expected 2028</span></p>
-                  <p className="text-gray-500 text-sm mt-1">CGPA: 8.3 / 10</p>
-                </div>
-                <div className="h-[1px] bg-white/10 w-full"></div>
-                <div>
-                  <h4 className="text-lg text-white font-medium">Higher Secondary & SSLC</h4>
-                  <p className="text-gray-400 mt-1">Dr. V. Genguswamy Naidu Matric Hr Sec School</p>
-                  <p className="text-gray-500 text-sm mt-1">HSC: 94% &bull; SSLC: 97.8%</p>
-                </div>
+
+              <div className="flex items-center gap-3">
+                <User className="w-4 h-4 text-[#71d300] shrink-0" />
+                <span className="text-xs text-gray-500 uppercase tracking-wider">Roles:</span>
+                <span className="text-white text-sm font-light">Fullstack Dev & UI/UX</span>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Briefcase className="w-4 h-4 text-[#71d300] shrink-0" />
+                <span className="text-xs text-gray-500 uppercase tracking-wider">Venture:</span>
+                <span className="text-white text-sm font-light">Technovanam</span>
               </div>
             </motion.div>
           </div>
+
+          {/* RIGHT COLUMN: Creative Academic Index (Interactable List Rows) */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="flex items-center gap-2 mb-4">
+              <GraduationCap className="w-4 h-4 text-[#71d300]" />
+              <h3 className="text-xs uppercase tracking-wider font-mono text-gray-400 font-semibold">Academic Index</h3>
+            </div>
+
+            {/* List Row Selectors */}
+            <div className="space-y-3">
+              {education.map((item, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveIndex(idx)}
+                  className={`w-full text-left py-4 px-5 border-b transition-all duration-300 flex items-center justify-between group cursor-pointer ${
+                    activeIndex === idx 
+                      ? 'border-[#71d300] bg-white/[0.02]' 
+                      : 'border-white/10 hover:border-white/30 bg-transparent'
+                  }`}
+                >
+                  <div className="flex items-center gap-4">
+                    <span className={`font-mono text-xs font-medium transition-colors duration-300 ${
+                      activeIndex === idx ? 'text-[#71d300]' : 'text-gray-600'
+                    }`}>
+                      {item.index}
+                    </span>
+                    <span className={`text-sm font-medium transition-colors duration-300 font-grotesk ${
+                      activeIndex === idx ? 'text-white' : 'text-gray-400 group-hover:text-white'
+                    }`}>
+                      {item.institution}
+                    </span>
+                  </div>
+                  <ArrowRight className={`w-4 h-4 transition-all duration-300 shrink-0 ${
+                    activeIndex === idx 
+                      ? 'text-[#71d300] translate-x-1' 
+                      : 'text-gray-600 group-hover:text-gray-400'
+                  }`} />
+                </button>
+              ))}
+            </div>
+
+            {/* Detail Panel */}
+            <div className="mt-8 pt-6 border-t border-white/5 min-h-[180px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-4"
+                >
+                  <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2">
+                    <h4 className="text-lg font-semibold text-white font-grotesk tracking-normal">
+                      {education[activeIndex].title}
+                    </h4>
+                    <span className="text-xs font-mono text-[#71d300] whitespace-nowrap">
+                      {education[activeIndex].period}
+                    </span>
+                  </div>
+
+                  <span className="inline-block px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 text-xs font-mono text-gray-300">
+                    {education[activeIndex].gpa}
+                  </span>
+
+                  <ul className="space-y-2 pt-2">
+                    {education[activeIndex].highlights.map((highlight, hIdx) => (
+                      <li key={hIdx} className="text-xs text-gray-400 flex items-start gap-2 leading-relaxed">
+                        <ChevronRight className="w-3.5 h-3.5 text-[#71d300]/80 shrink-0 mt-0.5" />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
         </div>
+
       </div>
     </section>
   );

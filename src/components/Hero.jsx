@@ -451,15 +451,13 @@ const Hero = () => {
         >
           <button
             onClick={() => setRoleIndex(0)}
-            className={`w-8 h-1 rounded-full transition-all duration-500 cursor-pointer ${
-              roleIndex % 2 === 0 ? 'bg-white w-12' : 'bg-white/15 hover:bg-white/30'
-            }`}
+            className={`w-8 h-1 rounded-full transition-all duration-500 cursor-pointer ${roleIndex % 2 === 0 ? 'bg-white w-12' : 'bg-white/15 hover:bg-white/30'
+              }`}
           />
           <button
             onClick={() => setRoleIndex(1)}
-            className={`w-8 h-1 rounded-full transition-all duration-500 cursor-pointer ${
-              roleIndex % 2 === 1 ? 'bg-[#71d300] w-12' : 'bg-white/15 hover:bg-white/30'
-            }`}
+            className={`w-8 h-1 rounded-full transition-all duration-500 cursor-pointer ${roleIndex % 2 === 1 ? 'bg-[#71d300] w-12' : 'bg-white/15 hover:bg-white/30'
+              }`}
           />
         </motion.div>
 

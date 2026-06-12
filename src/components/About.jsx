@@ -1,62 +1,55 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   GraduationCap, 
   MapPin, 
   Sparkles, 
   Briefcase,
-  ChevronRight,
   User,
-  ArrowRight
+  Cpu,
+  Database,
+  Globe,
+  Terminal
 } from 'lucide-react';
 
 const About = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
   const education = [
     {
-      index: '01',
-      title: 'B.E. Computer Science and Engineering',
-      institution: 'Sri Eshwar College of Engineering',
-      period: '2024 — 2028 (Expected)',
-      gpa: 'CGPA: 8.3 / 10',
-      highlights: [
-        'Specializing in advanced full-stack architectures and database systems.',
-        'Actively participating in developer chapters and innovation bootcamps.',
-        'Exploring the intersection of human-computer interaction and web performance.'
-      ]
+      id: 'EDU-01',
+      degree: 'B.E. Computer Science & Eng.',
+      inst: 'Sri Eshwar College of Engineering',
+      period: '2024 — 2028',
+      status: 'SYS.ACTIVE',
+      gpa: 'CGPA: 8.3/10',
+      desc: 'Specializing in advanced full-stack architectures, db systems, and human-computer interaction.'
     },
     {
-      index: '02',
-      title: 'Higher Secondary & SSLC',
-      institution: 'Dr. V. Genguswamy Naidu Matric Hr Sec School',
-      period: 'Graduated 2024',
+      id: 'EDU-02',
+      degree: 'HSC & SSLC',
+      inst: 'Dr. V. Genguswamy Naidu Matric Hr Sec',
+      period: 'Grad. 2024',
+      status: 'SYS.ARCHIVED',
       gpa: 'HSC: 94% | SSLC: 97.8%',
-      highlights: [
-        'Maintained top-tier academic ranks with major emphasis on science and computing streams.',
-        'Participated in science exhibitions, coding drills, and algebraic reasoning challenges.',
-        'Graduated with distinctions in both primary and higher secondary levels.'
-      ]
+      desc: 'Top-tier academic ranks with major emphasis on science, computing streams, and algebraic reasoning.'
     }
   ];
 
   return (
     <section className="relative py-24 md:py-32 overflow-hidden bg-[#050505] noise-overlay" id="about">
-      {/* Background Gradients & Ambient Effects matching Hero theme */}
+      {/* ═══ AMBIENT BACKGROUND ═══ */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/12 w-[400px] h-[400px] bg-[#71d300]/[0.03] rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/12 w-[400px] h-[400px] bg-violet-500/[0.02] rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 left-1/12 w-[500px] h-[500px] bg-[#71d300]/[0.04] rounded-full blur-[120px] animate-pulse-slow" />
+        <div className="absolute bottom-1/4 right-1/12 w-[400px] h-[400px] bg-violet-500/[0.03] rounded-full blur-[120px] animate-pulse-slow" style={{ animationDelay: '2s' }} />
       </div>
 
-      {/* Decorative Scanline detail matching Hero */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
-        <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#71d300]/10 to-transparent top-1/2" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-10 opacity-30">
+        <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#71d300]/20 to-transparent animate-scanline" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-20">
         
-        {/* HEADER SECTION - Elegant & Neat */}
-        <div className="border-b border-white/5 pb-10 mb-16">
+        {/* ═══ HEADER ═══ */}
+        <div className="mb-16 flex flex-col items-center md:items-start">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -64,7 +57,7 @@ const About = () => {
             className="flex items-center gap-2 text-[#71d300] mb-4"
           >
             <Sparkles className="w-4 h-4" />
-            <span className="text-xs uppercase tracking-wider font-mono font-medium">About Me</span>
+            <span className="text-xs uppercase tracking-[0.2em] font-mono font-semibold">System.Profile()</span>
           </motion.div>
           
           <motion.h2 
@@ -72,137 +65,141 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-grotesk text-3xl md:text-5xl font-light text-white tracking-normal leading-tight"
+            className="font-display text-4xl md:text-6xl font-normal text-white uppercase tracking-wide leading-none text-center md:text-left"
           >
-            I bridge engineering precision <br className="hidden md:inline" />
-            with intuitive user experience.
+            Bridging <span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.5)' }}>Engineering</span> <br className="hidden md:block"/>
+            & Intuition.
           </motion.h2>
         </div>
 
-        {/* TWO COLUMN GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+        {/* ═══ BENTO GRID ═══ */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
-          {/* LEFT COLUMN: Concise Bio & Metadata */}
-          <div className="lg:col-span-5 space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-gray-300 font-light leading-relaxed text-base md:text-lg"
-            >
-              <p>
-                Focusing on holistic product architecture, I build clean frontend interfaces and efficient backend logic. I treat code as a medium to create digital systems that are both highly performant and aesthetically premium.
-              </p>
-            </motion.div>
-
-            {/* Concise metadata list */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="pt-6 border-t border-white/5 space-y-4 font-grotesk"
-            >
-              <div className="flex items-center gap-3">
-                <MapPin className="w-4 h-4 text-[#71d300] shrink-0" />
-                <span className="text-xs text-gray-500 uppercase tracking-wider">Location:</span>
-                <span className="text-white text-sm font-light">Coimbatore, India</span>
+          {/* ── 1. BIO CORE (Spans 2 cols on tablet/desktop) ── */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="md:col-span-2 relative group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-md p-8 md:p-10 hover:border-white/20 transition-all duration-500"
+          >
+            {/* Hover Glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#71d300]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            
+            <div className="relative z-10 flex flex-col h-full justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/10 group-hover:border-[#71d300]/30 transition-colors">
+                  <User className="w-5 h-5 text-gray-400 group-hover:text-[#71d300] transition-colors" />
+                </div>
+                <h3 className="text-xl font-grotesk text-white mb-4">Core Directives</h3>
+                <p className="text-gray-400 font-light leading-relaxed text-base md:text-lg">
+                  Focusing on holistic product architecture, I build clean frontend interfaces and efficient backend logic. I treat code as a medium to create digital systems that are both highly performant and aesthetically premium. My work lies at the intersection of pixel-perfect design and robust system engineering.
+                </p>
               </div>
+            </div>
+          </motion.div>
 
-              <div className="flex items-center gap-3">
-                <User className="w-4 h-4 text-[#71d300] shrink-0" />
-                <span className="text-xs text-gray-500 uppercase tracking-wider">Roles:</span>
-                <span className="text-white text-sm font-light">Fullstack Dev & UI/UX</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <Briefcase className="w-4 h-4 text-[#71d300] shrink-0" />
-                <span className="text-xs text-gray-500 uppercase tracking-wider">Venture:</span>
-                <span className="text-white text-sm font-light">Technovanam</span>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* RIGHT COLUMN: Creative Academic Index (Interactable List Rows) */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="flex items-center gap-2 mb-4">
-              <GraduationCap className="w-4 h-4 text-[#71d300]" />
-              <h3 className="text-xs uppercase tracking-wider font-mono text-gray-400 font-semibold">Academic Index</h3>
+          {/* ── 2. COORDINATES (1 col) ── */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="relative group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-md p-8 flex flex-col items-center justify-center text-center hover:border-white/20 transition-all duration-500 min-h-[250px]"
+          >
+            {/* Radar Animation Background */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity duration-500">
+              <div className="w-48 h-48 border border-[#71d300]/30 rounded-full absolute" />
+              <div className="w-32 h-32 border border-[#71d300]/20 rounded-full absolute" />
+              <div className="w-full h-px bg-[#71d300]/20 absolute" />
+              <div className="h-full w-px bg-[#71d300]/20 absolute" />
+              {/* Sweeping line */}
+              <div className="absolute w-24 h-24 border-r-2 border-[#71d300] rounded-full animate-spin-slow origin-bottom-left" style={{ top: '50%', left: '50%', marginTop: '-6rem', marginLeft: '-6rem' }} />
             </div>
 
-            {/* List Row Selectors */}
-            <div className="space-y-3">
-              {education.map((item, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveIndex(idx)}
-                  className={`w-full text-left py-4 px-5 border-b transition-all duration-300 flex items-center justify-between group cursor-pointer ${
-                    activeIndex === idx 
-                      ? 'border-[#71d300] bg-white/[0.02]' 
-                      : 'border-white/10 hover:border-white/30 bg-transparent'
-                  }`}
+            <MapPin className="w-8 h-8 text-[#71d300] mb-4 relative z-10" />
+            <h3 className="text-lg font-grotesk text-white relative z-10">Coimbatore, IND</h3>
+            <p className="text-xs font-mono text-gray-500 mt-2 tracking-widest uppercase relative z-10">Base Location</p>
+          </motion.div>
+
+          {/* ── 3. CURRENT PROTOCOL (1 col) ── */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="relative group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-md p-8 hover:border-[#71d300]/30 transition-all duration-500"
+          >
+            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/10">
+              <Briefcase className="w-5 h-5 text-gray-400 group-hover:text-[#71d300] transition-colors" />
+            </div>
+            <div className="space-y-4">
+              <div>
+                <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-1">Current Protocol</p>
+                <h3 className="text-white font-grotesk text-lg">Full-Stack Dev & UI/UX</h3>
+              </div>
+              <div className="w-full h-px bg-white/10" />
+              <div>
+                <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-1">Venture</p>
+                <h3 className="text-white font-grotesk text-lg flex items-center gap-2">
+                  <Globe className="w-4 h-4 text-[#71d300]" />
+                  Technovanam
+                </h3>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* ── 4. KNOWLEDGE MODULES (Education) (Spans 2 cols) ── */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="md:col-span-2 relative rounded-2xl border border-white/10 bg-white/[0.01] backdrop-blur-sm p-6 md:p-8 flex flex-col gap-6"
+          >
+            <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+              <Database className="w-5 h-5 text-[#71d300]" />
+              <h3 className="text-lg font-grotesk text-white">Knowledge Databanks</h3>
+              <span className="ml-auto text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-white/5 px-2 py-1 rounded">2 Modules Found</span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {education.map((edu, idx) => (
+                <div 
+                  key={edu.id}
+                  className="group relative overflow-hidden rounded-xl border border-white/5 bg-white/[0.02] p-6 hover:bg-[#71d300]/[0.02] transition-all duration-300 hover:border-[#71d300]/20 hover:-translate-y-1"
                 >
-                  <div className="flex items-center gap-4">
-                    <span className={`font-mono text-xs font-medium transition-colors duration-300 ${
-                      activeIndex === idx ? 'text-[#71d300]' : 'text-gray-600'
-                    }`}>
-                      {item.index}
+                  {/* Glowing Edge on Hover */}
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#71d300]/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
+                  
+                  <div className="flex justify-between items-start mb-4">
+                    <span className={`text-[10px] font-mono px-2 py-1 rounded border ${edu.status === 'SYS.ACTIVE' ? 'text-[#71d300] bg-[#71d300]/10 border-[#71d300]/20' : 'text-gray-400 bg-white/5 border-white/10'}`}>
+                      {edu.status}
                     </span>
-                    <span className={`text-sm font-medium transition-colors duration-300 font-grotesk ${
-                      activeIndex === idx ? 'text-white' : 'text-gray-400 group-hover:text-white'
-                    }`}>
-                      {item.institution}
-                    </span>
+                    <span className="text-xs font-mono text-gray-500">{edu.id}</span>
                   </div>
-                  <ArrowRight className={`w-4 h-4 transition-all duration-300 shrink-0 ${
-                    activeIndex === idx 
-                      ? 'text-[#71d300] translate-x-1' 
-                      : 'text-gray-600 group-hover:text-gray-400'
-                  }`} />
-                </button>
+
+                  <h4 className="text-white font-grotesk text-lg mb-1">{edu.degree}</h4>
+                  <p className="text-sm text-gray-400 font-medium mb-4">{edu.inst}</p>
+                  
+                  {/* Stats Bar */}
+                  <div className="flex items-center gap-3 text-xs font-mono text-gray-500 mb-4 bg-white/5 p-2 rounded">
+                    <Terminal className="w-3 h-3" />
+                    <span>{edu.period}</span>
+                    <span className="w-px h-3 bg-white/20" />
+                    <span className="text-gray-300">{edu.gpa}</span>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
+                    {edu.desc}
+                  </p>
+                </div>
               ))}
             </div>
-
-            {/* Detail Panel */}
-            <div className="mt-8 pt-6 border-t border-white/5 min-h-[180px]">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="space-y-4"
-                >
-                  <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2">
-                    <h4 className="text-lg font-semibold text-white font-grotesk tracking-normal">
-                      {education[activeIndex].title}
-                    </h4>
-                    <span className="text-xs font-mono text-[#71d300] whitespace-nowrap">
-                      {education[activeIndex].period}
-                    </span>
-                  </div>
-
-                  <span className="inline-block px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 text-xs font-mono text-gray-300">
-                    {education[activeIndex].gpa}
-                  </span>
-
-                  <ul className="space-y-2 pt-2">
-                    {education[activeIndex].highlights.map((highlight, hIdx) => (
-                      <li key={hIdx} className="text-xs text-gray-400 flex items-start gap-2 leading-relaxed">
-                        <ChevronRight className="w-3.5 h-3.5 text-[#71d300]/80 shrink-0 mt-0.5" />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
+          </motion.div>
 
         </div>
-
       </div>
     </section>
   );

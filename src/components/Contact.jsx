@@ -1,126 +1,185 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Mail } from 'lucide-react';
-
-const contactLinks = [
-  {
-    name: "EMAIL",
-    label: "sanjana.b0831@gmail.com",
-    link: "mailto:sanjana.b0831@gmail.com",
-  },
-  {
-    name: "LINKEDIN",
-    label: "Connect with me",
-    link: "https://www.linkedin.com/in/sanjana-0831s/",
-  },
-  {
-    name: "GITHUB",
-    label: "Explore my code",
-    link: "https://github.com/sanjanab-31",
-  },
-  {
-    name: "WHATSAPP",
-    label: "Say hello",
-    link: "https://wa.me/",
-  }
-];
-
-const ContactRow = ({ item, index }) => (
-  <motion.a
-    href={item.link}
-    target="_blank"
-    rel="noreferrer"
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6, delay: index * 0.1 }}
-    className="group flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-white/20 hover:border-white/60 transition-colors duration-300 cursor-pointer"
-  >
-    <span className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-gray-300 group-hover:text-white transition-colors duration-300 uppercase tracking-normal mb-4 md:mb-0">
-      {item.name}
-    </span>
-    <div className="flex items-center gap-6 md:gap-8 w-full md:w-auto justify-between md:justify-end">
-      <span className="text-gray-300 font-light text-lg md:text-xl group-hover:text-white transition-colors duration-300">
-        {item.label}
-      </span>
-      <div className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300 shrink-0">
-        <ArrowUpRight className="w-6 h-6 group-hover:rotate-45 transition-transform duration-300" />
-      </div>
-    </div>
-  </motion.a>
-);
+import { Send, TerminalSquare, Mail, Phone } from 'lucide-react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const Contact = () => {
-  return (
-    <footer className="relative pt-16 md:pt-24 pb-0 overflow-hidden" id="contact">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 relative z-10">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-24">
-          
-          {/* Left Column: Text and Links */}
-          <div className="w-full flex flex-col justify-start items-start text-left">
-            <div className="mb-12">               
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="font-display text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-grey-100 leading-none mb-8"
-              >
-                Let's <br/> <span className="text-transparent [-webkit-text-stroke:0.01px_rgba(255,255,255,0.8)]">Collaborate.</span>
-              </motion.h2>
-            </div>
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-            <div className="w-full mt-auto">
-              <div className="flex flex-col w-full border-t border-white/20">
-                {contactLinks.map((item, index) => (
-                  <ContactRow key={item.name} item={item} index={index} />
-                ))}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 3000);
+    }, 1500);
+  };
+
+  return (
+    <section id="contact" className="relative w-full bg-black pt-32 overflow-hidden font-sans border-t border-white/10">
+      
+      {/* VERCEL GRID BACKGROUND */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div 
+          className="absolute inset-0 z-0 opacity-20 mix-blend-overlay"
+          style={{
+            backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+            backgroundSize: `4rem 4rem`
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+      </div>
+
+      <div className="relative max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24 z-10 pb-32">
+        
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-8 h-px bg-white/20" />
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-white/50">
+              Communication Link
+            </span>
+          </div>
+          <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6">
+            Let's Connect.
+          </h2>
+          <p className="text-lg text-white/50 font-light max-w-xl">
+            Whether you have a question, a proposal, or just want to say hi, I'll try my best to get back to you!
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border-l border-t border-white/[0.08]">
+          
+          {/* Contact Details Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-r border-white/[0.08]">
+            
+            {/* Phone */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="border-b border-r md:border-r-0 lg:border-r border-white/[0.08] p-8 hover:bg-white/[0.02] transition-colors"
+            >
+              <Phone className="w-6 h-6 text-white/40 mb-6" />
+              <h4 className="text-white text-lg font-medium mb-2">Phone</h4>
+              <p className="text-white/50 font-mono text-sm">+91 9363063546</p>
+            </motion.div>
+
+            {/* Email */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="border-b border-white/[0.08] p-8 hover:bg-white/[0.02] transition-colors md:border-l lg:border-l-0 border-white/[0.08]"
+            >
+              <Mail className="w-6 h-6 text-[#71d300] mb-6" />
+              <h4 className="text-white text-lg font-medium mb-2">Email</h4>
+              <p className="text-white/50 font-mono text-sm break-all">sanjana02@gmail.com</p>
+            </motion.div>
+
+            {/* Socials (Span 2) */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="md:col-span-2 border-b border-white/[0.08] p-8 flex flex-col justify-center items-center gap-6 bg-white/[0.01]"
+            >
+              <h4 className="text-white/40 text-xs font-mono uppercase tracking-widest">Social Network</h4>
+              <div className="flex gap-6">
+                <a href="#" className="p-4 border border-white/10 hover:border-white/30 hover:bg-white/[0.05] transition-colors">
+                  <FaGithub className="w-6 h-6 text-white" />
+                </a>
+                <a href="#" className="p-4 border border-white/10 hover:border-[#0077b5]/50 hover:bg-[#0077b5]/10 transition-colors">
+                  <FaLinkedin className="w-6 h-6 text-white hover:text-[#0077b5]" />
+                </a>
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Right Column: Form */}
+          {/* Form */}
           <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-full flex flex-col justify-center"
+            className="p-8 md:p-12 border-b border-r border-white/[0.08] bg-black/40 backdrop-blur-md relative"
           >
-            <form className="flex flex-col gap-10 w-full p-8 md:p-12 bg-white/[0.03] border border-white/10 rounded-[2rem] backdrop-blur-md shadow-2xl">
-              <div className="flex flex-col gap-3">
-                <label className="text-xs uppercase tracking-widest text-white font-semibold">What's your name?</label>
-                <input type="text" placeholder="John Doe" className="w-full bg-transparent border-b border-white/30 pb-4 pt-2 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400 transition-colors text-lg" />
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-mono text-white/40 uppercase tracking-widest">Identifier</label>
+                <input 
+                  type="text" 
+                  required
+                  placeholder="John Doe"
+                  className="w-full bg-transparent border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-[#71d300] transition-colors"
+                />
               </div>
-              <div className="flex flex-col gap-3">
-                <label className="text-xs uppercase tracking-widest text-white font-semibold">What's your email?</label>
-                <input type="email" placeholder="john@doe.com" className="w-full bg-transparent border-b border-white/30 pb-4 pt-2 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400 transition-colors text-lg" />
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-mono text-white/40 uppercase tracking-widest">Network Address</label>
+                <input 
+                  type="email" 
+                  required
+                  placeholder="john@domain.com"
+                  className="w-full bg-transparent border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-[#71d300] transition-colors"
+                />
               </div>
-              <div className="flex flex-col gap-3">
-                <label className="text-xs uppercase tracking-widest text-white font-semibold">Write your message</label>
-                <textarea rows="4" placeholder="Hello Sanjana, can you help me with..." className="w-full bg-transparent border-b border-white/30 pb-4 pt-2 text-white placeholder:text-white/30 focus:outline-none focus:border-emerald-400 transition-colors text-lg resize-none"></textarea>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-mono text-white/40 uppercase tracking-widest">Payload</label>
+                <textarea 
+                  required
+                  rows="4"
+                  placeholder="System architecture looks solid..."
+                  className="w-full bg-transparent border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-[#71d300] transition-colors resize-none"
+                />
               </div>
-              <button type="button" className="group mt-6 relative inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-black rounded-full overflow-hidden self-start hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                <span className="font-bold uppercase tracking-widest text-sm relative z-10">Send Message</span>
-                <ArrowUpRight className="w-5 h-5 relative z-10 group-hover:rotate-45 transition-transform duration-300" />
+
+              <button 
+                type="submit" 
+                disabled={isSubmitting || submitted}
+                className={`w-full py-4 mt-4 font-mono text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-3 border ${
+                  submitted 
+                    ? 'bg-[#71d300]/20 border-[#71d300] text-[#71d300]' 
+                    : isSubmitting
+                      ? 'bg-white/5 border-white/20 text-white/50 cursor-wait'
+                      : 'bg-white text-black hover:bg-transparent hover:text-white hover:border-white'
+                }`}
+              >
+                {submitted ? (
+                  <>Payload Delivered <TerminalSquare className="w-4 h-4" /></>
+                ) : isSubmitting ? (
+                  <>Transmitting...</>
+                ) : (
+                  <>Execute Transmission <Send className="w-4 h-4" /></>
+                )}
               </button>
             </form>
           </motion.div>
 
         </div>
+      </div>
 
-        <div className="h-[1px] bg-white/10 w-full mb-8"></div>
-        
-        {/* <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 font-light">
-          <p>&copy; {new Date().getFullYear()} Sanjana B. All rights reserved.</p>
-        </div> */}
+      {/* Footer Area */}
+      <div className="w-full border-t border-white/10 bg-black py-12 px-6 md:px-12 lg:px-24">
+        <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-white/30 font-mono text-xs uppercase tracking-widest">
+            © {new Date().getFullYear()} SANJANA. All Rights Reserved.
+          </p>
+          <div className="flex gap-4">
+            <span className="text-white/30 font-mono text-xs uppercase tracking-widest">System Status: <span className="text-[#71d300]">Online</span></span>
+          </div>
+        </div>
       </div>
-      
-      <div className="w-full flex justify-center mt-12 px-4 translate-y-[5%]">
-        <h1 className="text-[16vw] md:text-[14vw] lg:text-[280px] font-medium uppercase whitespace-nowrap tracking-wide leading-[0.75] text-white text-center w-full" style={{ fontFamily: "'PINEON', sans-serif" }}>SANJANA</h1>
-      </div>
-    </footer>
+
+    </section>
   );
 };
 

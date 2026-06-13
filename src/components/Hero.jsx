@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 /* ────────────────────────────────────
    FLOATING PARTICLES — Canvas-based
@@ -190,7 +190,6 @@ const Hero = () => {
   const heroScale = useTransform(scrollY, [0, 600], [1, 0.95]);
 
   const [currentTime, setCurrentTime] = useState('');
-  const [roleIndex, setRoleIndex] = useState(0);
 
   // Live clock
   useEffect(() => {
@@ -201,14 +200,6 @@ const Hero = () => {
     tick();
     const timer = setInterval(tick, 1000);
     return () => clearInterval(timer);
-  }, []);
-
-  // Alternate between two slides every 3.5s
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRoleIndex(prev => (prev + 1) % 2);
-    }, 3500);
-    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -356,110 +347,43 @@ const Hero = () => {
           />
         </motion.div>
 
-        {/* ── ALTERNATING MASSIVE TYPOGRAPHY ── */}
-        {/* Two "slides" that swap every 3.5s: slide 0 = FULL-STACK + UI/UX DESIGNER, slide 1 = CO-FOUNDER & CTO + @ TECHNOVANAM */}
+        {/* ── MASSIVE TYPOGRAPHY ── */}
         <div className="relative w-full text-center flex flex-col items-center justify-center" style={{ minHeight: '28vw' }}>
-          <AnimatePresence mode="wait">
-            {roleIndex % 2 === 0 ? (
-              <motion.div
-                key="slide-dev"
-                initial={{ opacity: 0, y: 60, scale: 0.97, filter: 'blur(8px)' }}
-                animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -60, scale: 0.97, filter: 'blur(8px)' }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full flex flex-col items-center justify-center"
-              >
-                <motion.div style={{ y: y1 }}>
-                  <h1 className="font-display text-[14vw] md:text-[12vw] lg:text-[10vw] font-normal uppercase leading-none text-white relative z-10 flex flex-wrap justify-center">
-                    <AnimatedLetters
-                      text="FULL-STACK"
-                      style={{ color: '#ffffff' }}
-                      hoverStyle={{ color: '#71d300', textShadow: '0 0 25px rgba(113, 211, 0, 0.8)' }}
-                    />
-                  </h1>
-                </motion.div>
-                <motion.div style={{ y: y2 }} className="mt-1 md:mt-3">
-                  <h1 className="font-display text-[11vw] md:text-[10vw] lg:text-[8.5vw] font-normal uppercase leading-none relative z-10 cursor-default flex flex-wrap justify-center">
-                    <AnimatedLetters
-                      text="& UI/UX DESIGNER"
-                      style={{
-                        color: 'transparent',
-                        WebkitTextStroke: '2px rgba(255, 255, 255, 0.4)',
-                      }}
-                      hoverStyle={{
-                        color: '#ffffff',
-                        WebkitTextStroke: '2px rgba(255, 255, 255, 1)',
-                        textShadow: '0 0 25px rgba(255, 255, 255, 0.8)',
-                      }}
-                      delay={0.15}
-                    />
-                  </h1>
-                </motion.div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="slide-cto"
-                initial={{ opacity: 0, y: 60, scale: 0.97, filter: 'blur(8px)' }}
-                animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -60, scale: 0.97, filter: 'blur(8px)' }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full flex flex-col items-center justify-center"
-              >
-                <motion.div style={{ y: y1 }}>
-                  <h1 className="font-display text-[12vw] md:text-[10vw] lg:text-[8.5vw] font-normal uppercase leading-none text-white relative z-10 flex flex-wrap justify-center">
-                    <AnimatedLetters
-                      text="CO-FOUNDER"
-                      style={{ color: '#ffffff' }}
-                      hoverStyle={{ color: '#71d300', textShadow: '0 0 25px rgba(113, 211, 0, 0.8)' }}
-                    />
-                    <AnimatedLetters
-                      text=" & CTO"
-                      style={{ color: '#71d300' }}
-                      hoverStyle={{ color: '#ffffff', textShadow: '0 0 25px rgba(255, 255, 255, 0.8)' }}
-                      delay={0.25}
-                    />
-                  </h1>
-                </motion.div>
-                <motion.div style={{ y: y2 }} className="mt-1 md:mt-3">
-                  <h1 className="font-display text-[9vw] md:text-[8vw] lg:text-[6.5vw] font-normal uppercase leading-none relative z-10 cursor-default flex flex-wrap justify-center">
-                    <AnimatedLetters
-                      text="@ TECHNOVANAM"
-                      style={{
-                        color: 'transparent',
-                        WebkitTextStroke: '2px rgba(113, 211, 0, 0.4)',
-                      }}
-                      hoverStyle={{
-                        color: '#71d300',
-                        WebkitTextStroke: '2px rgba(113, 211, 0, 1)',
-                        textShadow: '0 0 25px rgba(113, 211, 0, 0.8)',
-                      }}
-                      delay={0.15}
-                    />
-                  </h1>
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <motion.div
+            key="slide-dev"
+            initial={{ opacity: 0, y: 60, scale: 0.97, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full flex flex-col items-center justify-center"
+          >
+            <motion.div style={{ y: y1 }}>
+              <h1 className="font-display text-[14vw] md:text-[12vw] lg:text-[10vw] font-normal uppercase leading-none text-white relative z-10 flex flex-wrap justify-center">
+                <AnimatedLetters
+                  text="FULL-STACK"
+                  style={{ color: '#ffffff' }}
+                  hoverStyle={{ color: '#71d300', textShadow: '0 0 25px rgba(113, 211, 0, 0.8)' }}
+                />
+              </h1>
+            </motion.div>
+            <motion.div style={{ y: y2 }} className="mt-1 md:mt-3">
+              <h1 className="font-display text-[11vw] md:text-[10vw] lg:text-[8.5vw] font-normal uppercase leading-none relative z-10 cursor-default flex flex-wrap justify-center">
+                <AnimatedLetters
+                  text="& UI/UX DESIGNER"
+                  style={{
+                    color: 'transparent',
+                    WebkitTextStroke: '2px rgba(255, 255, 255, 0.4)',
+                  }}
+                  hoverStyle={{
+                    color: '#ffffff',
+                    WebkitTextStroke: '2px rgba(255, 255, 255, 1)',
+                    textShadow: '0 0 25px rgba(255, 255, 255, 0.8)',
+                  }}
+                  delay={0.15}
+                />
+              </h1>
+            </motion.div>
+          </motion.div>
         </div>
-
-        {/* ── Slide indicator dots ── */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="flex items-center gap-3 mt-6 md:mt-8"
-        >
-          <button
-            onClick={() => setRoleIndex(0)}
-            className={`w-8 h-1 rounded-full transition-all duration-500 cursor-pointer ${roleIndex % 2 === 0 ? 'bg-white w-12' : 'bg-white/15 hover:bg-white/30'
-              }`}
-          />
-          <button
-            onClick={() => setRoleIndex(1)}
-            className={`w-8 h-1 rounded-full transition-all duration-500 cursor-pointer ${roleIndex % 2 === 1 ? 'bg-[#71d300] w-12' : 'bg-white/15 hover:bg-white/30'
-              }`}
-          />
-        </motion.div>
 
         {/* ── Bottom decorative strip ── */}
         <motion.div

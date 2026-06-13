@@ -1,208 +1,232 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  GraduationCap, 
-  MapPin, 
-  Sparkles, 
-  Briefcase,
-  User,
-  Cpu,
-  Database,
-  Globe,
-  Terminal
-} from 'lucide-react';
+import { MapPin, Code2, Layers, Cpu, Globe, TerminalSquare } from 'lucide-react';
 
-const About = () => {
-  const education = [
+/* ────────────────────────────────────
+   VERCEL-STYLE RAZOR SHARP CARD
+   ──────────────────────────────────── */
+const VercelCard = ({ children, className, delay = 0 }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay, ease: "easeOut" }}
+    className={`relative group bg-black/60 border border-white/[0.08] p-8 md:p-10 backdrop-blur-2xl transition-colors duration-300 hover:border-white/30 hover:bg-black/80 ${className}`}
+  >
+    <div className="relative z-10 h-full flex flex-col">
+      {children}
+    </div>
+  </motion.div>
+);
+
+/* ────────────────────────────────────
+   ACADEMIC MILESTONES (Flat Timeline)
+   ──────────────────────────────────── */
+const AcademicMilestones = () => {
+  const milestones = [
     {
-      id: 'EDU-01',
-      degree: 'B.E. Computer Science & Eng.',
-      inst: 'Sri Eshwar College of Engineering',
-      period: '2024 — 2028',
-      status: 'SYS.ACTIVE',
-      gpa: 'CGPA: 8.3/10',
-      desc: 'Specializing in advanced full-stack architectures, db systems, and human-computer interaction.'
+      id: '01',
+      degree: 'SSLC (Secondary School)',
+      inst: 'Dr. V. Genguswamy Naidu Matric Hr Sec',
+      period: '2021 — 2022',
+      desc: 'Foundation of algebraic reasoning and core sciences. Achieved 97.8% board examination score.',
     },
     {
-      id: 'EDU-02',
-      degree: 'HSC & SSLC',
+      id: '02',
+      degree: 'HSC (Higher Secondary)',
       inst: 'Dr. V. Genguswamy Naidu Matric Hr Sec',
-      period: 'Grad. 2024',
-      status: 'SYS.ARCHIVED',
-      gpa: 'HSC: 94% | SSLC: 97.8%',
-      desc: 'Top-tier academic ranks with major emphasis on science, computing streams, and algebraic reasoning.'
+      period: '2023 — 2024',
+      desc: 'Top-tier academic ranks with major emphasis on science and computing streams. Achieved 94% board examination score.',
+    },
+    {
+      id: '03',
+      degree: 'B.E. Computer Science',
+      inst: 'Sri Eshwar College of Engineering',
+      period: '2024 — Till Date',
+      desc: 'Specializing in advanced full-stack architectures, database systems, and human-computer interaction. SGPA - 8.5%.',
     }
   ];
 
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-[#050505] noise-overlay" id="about">
-      {/* ═══ AMBIENT BACKGROUND ═══ */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/12 w-[500px] h-[500px] bg-[#71d300]/[0.04] rounded-full blur-[120px] animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/12 w-[400px] h-[400px] bg-violet-500/[0.03] rounded-full blur-[120px] animate-pulse-slow" style={{ animationDelay: '2s' }} />
+    <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24 pb-32">
+      <div className="flex items-center gap-4 mb-12">
+        <div className="w-8 h-px bg-white/20" />
+        <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white/50">
+          Academic Milestones
+        </h3>
+        <div className="flex-1 h-px bg-white/10" />
       </div>
 
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-10 opacity-30">
-        <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#71d300]/20 to-transparent animate-scanline" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-20">
-        
-        {/* ═══ HEADER ═══ */}
-        <div className="mb-16 flex flex-col items-center md:items-start">
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-l border-t border-white/[0.08]">
+        {milestones.map((item, index) => (
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="flex items-center gap-2 text-[#71d300] mb-4"
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="border-r border-b border-white/[0.08] p-8 md:p-12 flex flex-col justify-between hover:bg-white/[0.02] transition-colors duration-300"
           >
-            <Sparkles className="w-4 h-4" />
-            <span className="text-xs uppercase tracking-[0.2em] font-mono font-semibold">System.Profile()</span>
-          </motion.div>
-          
-          <motion.h2 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="font-display text-4xl md:text-6xl font-normal text-white uppercase tracking-wide leading-none text-center md:text-left"
-          >
-            Bridging <span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.5)' }}>Engineering</span> <br className="hidden md:block"/>
-            & Intuition.
-          </motion.h2>
-        </div>
-
-        {/* ═══ BENTO GRID ═══ */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          {/* ── 1. BIO CORE (Spans 2 cols on tablet/desktop) ── */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="md:col-span-2 relative group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-md p-8 md:p-10 hover:border-white/20 transition-all duration-500"
-          >
-            {/* Hover Glow */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#71d300]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <div>
+              <div className="flex justify-between items-start mb-6">
+                <span className="text-xs font-mono text-[#71d300] tracking-widest px-3 py-1 border border-[#71d300]/30 bg-[#71d300]/10">
+                  {item.period}
+                </span>
+                <span className="text-xs font-mono text-white/30">{item.id}</span>
+              </div>
+              <h4 className="text-2xl font-semibold text-white tracking-tight mb-2">
+                {item.degree}
+              </h4>
+              <p className="text-sm font-mono text-white/40 uppercase tracking-widest mb-8">
+                {item.inst}
+              </p>
+            </div>
             
-            <div className="relative z-10 flex flex-col h-full justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/10 group-hover:border-[#71d300]/30 transition-colors">
-                  <User className="w-5 h-5 text-gray-400 group-hover:text-[#71d300] transition-colors" />
+            <p className="text-white/60 font-light leading-relaxed">
+              {item.desc}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════
+   ABOUT SECTION
+   ════════════════════════════════════ */
+const About = () => {
+  return (
+    <section id="about" className="relative w-full bg-black font-sans text-white border-t border-white/10">
+      
+      {/* ═══ VERCEL GRID BACKGROUND ═══ */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Glowing Orbs Behind Grid */}
+        <motion.div
+          animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.25, 0.15] }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-[20%] right-[20%] w-[600px] h-[600px] bg-[#71d300] rounded-full blur-[200px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          className="absolute bottom-[10%] left-[10%] w-[500px] h-[500px] bg-violet-600 rounded-full blur-[200px]"
+        />
+        
+        {/* SVG Grid Overlay */}
+        <div 
+          className="absolute inset-0 z-0 opacity-20 mix-blend-overlay"
+          style={{
+            backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+            backgroundSize: `4rem 4rem`
+          }}
+        />
+        
+        {/* Top/Bottom Fade for smooth transition */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+      </div>
+
+      {/* ═══ SHARP MASONRY SECTION ═══ */}
+      <div className="relative pt-32 pb-16 px-6 md:px-12 lg:px-24 z-20 max-w-[1600px] mx-auto">
+        
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-8 h-px bg-white/20" />
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-white/50">
+              Behind the Code
+            </span>
+          </div>
+          <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6">
+            About me.
+          </h2>
+          <p className="text-lg md:text-xl text-white/50 font-light max-w-2xl border-l border-[#71d300] pl-6">
+            Designing and developing digital experiences that are intuitive, precise, and exceptionally engineered.
+          </p>
+        </motion.div>
+
+        {/* Sharp Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-0 border-l border-t border-white/[0.08]">
+          
+          {/* Main Bio Card (Span 2x2) */}
+          <VercelCard className="md:col-span-2 md:row-span-2 border-r border-b" delay={0.1}>
+            <TerminalSquare className="w-6 h-6 text-white/40 mb-12" />
+            <h3 className="text-2xl md:text-4xl font-semibold text-white mb-6 leading-tight tracking-tight">
+              Aspiring <span className="text-[#71d300]">Computer Science</span> professional specializing in UI/UX and full-stack development.
+            </h3>
+            <p className="text-white/50 font-light text-lg leading-relaxed mb-6">
+              I am passionate about creating intuitive user interfaces and impactful digital solutions. Currently learning the MERN stack, I aim to build user-focused applications by combining my technical expertise with rigorous engineering standards.
+            </p>
+          </VercelCard>
+
+          {/* Location / Status Card */}
+          <VercelCard className="md:col-span-1 md:row-span-1 border-r border-b" delay={0.2}>
+            <div className="flex justify-between items-start mb-12">
+              <Globe className="w-5 h-5 text-white/30" />
+              <MapPin className="w-4 h-4 text-[#71d300]" />
+            </div>
+            <div>
+              <p className="text-xs font-mono text-white/40 uppercase tracking-widest mb-2">Base</p>
+              <h4 className="text-lg text-white font-medium tracking-tight">Coimbatore, IND</h4>
+              
+              <div className="mt-8 flex items-center gap-3 border border-[#71d300]/30 bg-[#71d300]/5 w-fit px-3 py-1.5">
+                <div className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#71d300] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#71d300]"></span>
                 </div>
-                <h3 className="text-xl font-grotesk text-white mb-4">Core Directives</h3>
-                <p className="text-gray-400 font-light leading-relaxed text-base md:text-lg">
-                  Focusing on holistic product architecture, I build clean frontend interfaces and efficient backend logic. I treat code as a medium to create digital systems that are both highly performant and aesthetically premium. My work lies at the intersection of pixel-perfect design and robust system engineering.
-                </p>
+                <span className="text-[10px] font-mono text-[#71d300] uppercase tracking-widest">Available</span>
               </div>
             </div>
-          </motion.div>
+          </VercelCard>
 
-          {/* ── 2. COORDINATES (1 col) ── */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="relative group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-md p-8 flex flex-col items-center justify-center text-center hover:border-white/20 transition-all duration-500 min-h-[250px]"
-          >
-            {/* Radar Animation Background */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity duration-500">
-              <div className="w-48 h-48 border border-[#71d300]/30 rounded-full absolute" />
-              <div className="w-32 h-32 border border-[#71d300]/20 rounded-full absolute" />
-              <div className="w-full h-px bg-[#71d300]/20 absolute" />
-              <div className="h-full w-px bg-[#71d300]/20 absolute" />
-              {/* Sweeping line */}
-              <div className="absolute w-24 h-24 border-r-2 border-[#71d300] rounded-full animate-spin-slow origin-bottom-left" style={{ top: '50%', left: '50%', marginTop: '-6rem', marginLeft: '-6rem' }} />
+          {/* Languages Card */}
+          <VercelCard className="md:col-span-1 md:row-span-1 border-r border-b flex flex-col justify-center items-center text-center" delay={0.3}>
+            <Layers className="w-6 h-6 text-white/30 mb-6" />
+            <h4 className="text-2xl font-semibold text-white mb-2 tracking-tight">Bilingual</h4>
+            <p className="text-xs font-mono text-white/40 uppercase tracking-widest">English & Tamil</p>
+          </VercelCard>
+
+          {/* Tech Stack Highlights */}
+          <VercelCard className="md:col-span-2 md:row-span-1 border-r border-b" delay={0.4}>
+            <div className="flex items-center gap-3 mb-8">
+              <Code2 className="w-4 h-4 text-white/40" />
+              <h4 className="text-xs font-mono text-white/50 uppercase tracking-widest">Tech Arsenal</h4>
             </div>
-
-            <MapPin className="w-8 h-8 text-[#71d300] mb-4 relative z-10" />
-            <h3 className="text-lg font-grotesk text-white relative z-10">Coimbatore, IND</h3>
-            <p className="text-xs font-mono text-gray-500 mt-2 tracking-widest uppercase relative z-10">Base Location</p>
-          </motion.div>
-
-          {/* ── 3. CURRENT PROTOCOL (1 col) ── */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="relative group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-md p-8 hover:border-[#71d300]/30 transition-all duration-500"
-          >
-            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/10">
-              <Briefcase className="w-5 h-5 text-gray-400 group-hover:text-[#71d300] transition-colors" />
-            </div>
-            <div className="space-y-4">
-              <div>
-                <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-1">Current Protocol</p>
-                <h3 className="text-white font-grotesk text-lg">Full-Stack Dev & UI/UX</h3>
-              </div>
-              <div className="w-full h-px bg-white/10" />
-              <div>
-                <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-1">Venture</p>
-                <h3 className="text-white font-grotesk text-lg flex items-center gap-2">
-                  <Globe className="w-4 h-4 text-[#71d300]" />
-                  Technovanam
-                </h3>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* ── 4. KNOWLEDGE MODULES (Education) (Spans 2 cols) ── */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="md:col-span-2 relative rounded-2xl border border-white/10 bg-white/[0.01] backdrop-blur-sm p-6 md:p-8 flex flex-col gap-6"
-          >
-            <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-              <Database className="w-5 h-5 text-[#71d300]" />
-              <h3 className="text-lg font-grotesk text-white">Knowledge Databanks</h3>
-              <span className="ml-auto text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-white/5 px-2 py-1 rounded">2 Modules Found</span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {education.map((edu, idx) => (
-                <div 
-                  key={edu.id}
-                  className="group relative overflow-hidden rounded-xl border border-white/5 bg-white/[0.02] p-6 hover:bg-[#71d300]/[0.02] transition-all duration-300 hover:border-[#71d300]/20 hover:-translate-y-1"
-                >
-                  {/* Glowing Edge on Hover */}
-                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#71d300]/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
-                  
-                  <div className="flex justify-between items-start mb-4">
-                    <span className={`text-[10px] font-mono px-2 py-1 rounded border ${edu.status === 'SYS.ACTIVE' ? 'text-[#71d300] bg-[#71d300]/10 border-[#71d300]/20' : 'text-gray-400 bg-white/5 border-white/10'}`}>
-                      {edu.status}
-                    </span>
-                    <span className="text-xs font-mono text-gray-500">{edu.id}</span>
-                  </div>
-
-                  <h4 className="text-white font-grotesk text-lg mb-1">{edu.degree}</h4>
-                  <p className="text-sm text-gray-400 font-medium mb-4">{edu.inst}</p>
-                  
-                  {/* Stats Bar */}
-                  <div className="flex items-center gap-3 text-xs font-mono text-gray-500 mb-4 bg-white/5 p-2 rounded">
-                    <Terminal className="w-3 h-3" />
-                    <span>{edu.period}</span>
-                    <span className="w-px h-3 bg-white/20" />
-                    <span className="text-gray-300">{edu.gpa}</span>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
-                    {edu.desc}
-                  </p>
-                </div>
+            <div className="flex flex-wrap gap-2">
+              {['C', 'C++', 'Python', 'Java', 'SQL', 'HTML/CSS', 'JavaScript', 'MERN Stack', 'Figma', 'Canva'].map((tech) => (
+                <span key={tech} className="px-3 py-1.5 text-xs font-mono text-white/70 border border-white/10 hover:border-white/40 hover:text-white transition-colors cursor-default bg-white/[0.02]">
+                  {tech}
+                </span>
               ))}
             </div>
-          </motion.div>
+          </VercelCard>
+
+          {/* Core Tools Card (Span 2x1) */}
+          <VercelCard className="md:col-span-2 md:row-span-1 border-r border-b" delay={0.5}>
+            <div className="flex items-center gap-3 mb-8">
+              <Cpu className="w-4 h-4 text-white/40" />
+              <h4 className="text-xs font-mono text-white/50 uppercase tracking-widest">Workflow & Tools</h4>
+            </div>
+            <h3 className="text-xl font-semibold text-white mb-4 tracking-tight">Design to Deployment</h3>
+            <p className="text-white/50 font-light leading-relaxed text-sm">
+              I leverage tools like <span className="text-white font-medium">Figma</span> and <span className="text-white font-medium">Canva</span> for conceptualizing and prototyping, while using <span className="text-white font-medium">VS Code</span> and <span className="text-white font-medium">GitHub</span> to write clean, maintainable code and manage version control.
+            </p>
+          </VercelCard>
 
         </div>
       </div>
+
+      <AcademicMilestones />
+
     </section>
   );
 };
 
 export default About;
+

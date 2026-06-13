@@ -1,174 +1,162 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa';
 
+/* ────────────────────────────────────
+   VERCEL-STYLE PROJECT BLOCK
+   ──────────────────────────────────── */
+const ProjectBlock = ({ num, date, year, yearSubtext, title, desc, tech, yearScale, yearOpacity, contentX, contentOpacity, timelineOrientation }) => {
+  return (
+    <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+      <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24 h-full flex flex-col md:flex-row items-center justify-center gap-12 lg:gap-24 relative">
+        
+        {/* YEAR / DATE / NUM (Sharp Geometric) */}
+        <motion.div 
+          style={{ scale: yearScale, opacity: yearOpacity }}
+          className={`flex flex-col ${timelineOrientation === 'horizontal-top' ? 'md:-translate-y-20' : 'md:translate-y-0'} z-10 w-full md:w-auto shrink-0 border-l border-white/10 pl-8 relative`}
+        >
+          {/* Timeline Connector Line */}
+          <div className="absolute top-1/2 -left-[1px] w-[1px] h-32 bg-[#71d300] -translate-y-1/2" />
+
+          <div className="flex items-baseline gap-2 mb-2">
+            <span className="text-sm font-mono text-[#71d300] uppercase tracking-widest">{date}</span>
+          </div>
+          <h3 className="text-7xl md:text-8xl lg:text-[120px] font-bold text-white tracking-tighter leading-none mb-4">
+            {year}
+          </h3>
+          <p className="text-xs font-mono text-white/40 tracking-[0.2em] whitespace-pre-line leading-relaxed uppercase">
+            {yearSubtext}
+          </p>
+          <div className="absolute -top-12 left-0 text-[10px] font-mono text-white/20 tracking-[0.3em]">
+            PROJ // {num}
+          </div>
+        </motion.div>
+
+        {/* CONTENT CARD (Vercel Style) */}
+        <motion.div 
+          style={{ x: contentX, opacity: contentOpacity }}
+          className="w-full max-w-3xl z-20 flex flex-col justify-center"
+        >
+          <div className="bg-black/80 backdrop-blur-3xl border border-white/10 p-8 md:p-12 transition-colors duration-300 hover:border-white/30 group">
+            {/* Minimalist Top Bar */}
+            <div className="flex items-center justify-between mb-12 border-b border-white/10 pb-6">
+              <span className="text-xs font-mono text-[#71d300] tracking-widest bg-[#71d300]/10 px-3 py-1 border border-[#71d300]/20">
+                LATEST WORK
+              </span>
+              <div className="flex gap-4">
+                <FaGithub className="w-5 h-5 text-white/40 hover:text-white transition-colors cursor-pointer" />
+                <ExternalLink className="w-5 h-5 text-white/40 hover:text-white transition-colors cursor-pointer" />
+              </div>
+            </div>
+
+            <h4 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight group-hover:text-[#71d300] transition-colors duration-300">
+              {title}
+            </h4>
+            
+            <p className="text-white/50 text-lg font-light leading-relaxed mb-10">
+              {desc}
+            </p>
+
+            {/* Sharp Tech Stack Tags */}
+            <div className="flex flex-wrap gap-2">
+              {tech.map((t, i) => (
+                <span key={i} className="text-xs font-mono text-white/60 uppercase tracking-widest border border-white/10 bg-white/[0.02] px-4 py-2 hover:border-white/30 hover:text-white transition-colors cursor-default">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+      </div>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════
+   PROJECTS SECTION
+   ════════════════════════════════════ */
 const Projects = () => {
   const containerRef = useRef(null);
+
+  // Scroll tracking
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  // TIMELINE MORPHING LOGIC
-  // A thick white line acting as the backbone
-  const pathData = useTransform(
-    scrollYProgress,
-    [0, 0.05, 0.28, 0.35, 0.55, 0.65],
-    [
-      "M 300 0 L 300 800", // P1: Vertical left
-      "M 300 0 L 300 800", // P1: Vertical left
-      "M 300 0 L 300 800", // End P1
-      "M 0 350 L 1200 350", // P2: Horizontal top
-      "M 0 350 L 1200 350", // End P2
-      "M 300 0 L 300 800", // P3: Vertical left again
-    ]
-  );
+  // Project 1 animations
+  const p1YearScale = useTransform(scrollYProgress, [0, 0.25], [1, 0.8]);
+  const p1YearOpacity = useTransform(scrollYProgress, [0.15, 0.25], [1, 0]);
+  const p1ContentX = useTransform(scrollYProgress, [0, 0.25], ["0%", "-100%"]);
+  const p1ContentOpacity = useTransform(scrollYProgress, [0.1, 0.25], [1, 0]);
 
-  const pathLength = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
+  // Project 2 animations
+  const p2YearScale = useTransform(scrollYProgress, [0.2, 0.35, 0.6], [0.8, 1, 0.8]);
+  const p2YearOpacity = useTransform(scrollYProgress, [0.2, 0.35, 0.5, 0.6], [0, 1, 1, 0]);
+  const p2ContentX = useTransform(scrollYProgress, [0.2, 0.35, 0.6], ["100%", "0%", "-100%"]);
+  const p2ContentOpacity = useTransform(scrollYProgress, [0.2, 0.35, 0.5, 0.6], [0, 1, 1, 0]);
 
-  // ==============================
-  // PROJECT 01: VANGUARD
-  // ==============================
-  const p1YearScale = useTransform(scrollYProgress, [0, 0.28, 0.32], [1, 1, 0.5]);
-  const p1YearOpacity = useTransform(scrollYProgress, [0, 0.28, 0.32], [1, 1, 0]);
-  const p1ContentX = useTransform(scrollYProgress, [0, 0.28, 0.31], [0, 0, -50]);
-  const p1ContentOpacity = useTransform(scrollYProgress, [0, 0.28, 0.31], [1, 1, 0]);
-
-  // ==============================
-  // PROJECT 02: SCHOOL ERP
-  // ==============================
-  const p2YearScale = useTransform(scrollYProgress, [0.32, 0.38, 0.55, 0.60], [0.5, 1, 1, 0.5]);
-  const p2YearOpacity = useTransform(scrollYProgress, [0.32, 0.38, 0.55, 0.60], [0, 1, 1, 0]);
-  const p2ContentX = useTransform(scrollYProgress, [0.35, 0.4, 0.55, 0.59], [50, 0, 0, -50]);
-  const p2ContentOpacity = useTransform(scrollYProgress, [0.35, 0.4, 0.55, 0.59], [0, 1, 1, 0]);
-
-  // ==============================
-  // PROJECT 03: BILLING SOFTWARE
-  // ==============================
-  const p3YearScale = useTransform(scrollYProgress, [0.62, 0.68, 0.90, 0.95], [0.5, 1, 1, 0.5]);
-  const p3YearOpacity = useTransform(scrollYProgress, [0.62, 0.68, 0.90, 0.95], [0, 1, 1, 0]);
-  const p3ContentX = useTransform(scrollYProgress, [0.65, 0.7, 0.90, 0.94], [50, 0, 0, -50]);
-  const p3ContentOpacity = useTransform(scrollYProgress, [0.65, 0.7, 0.90, 0.94], [0, 1, 1, 0]);
-
-  const ProjectBlock = ({ num, date, year, yearSubtext, title, desc, tech, yearScale, yearOpacity, contentX, contentOpacity, timelineOrientation }) => {
-
-    // Position classes based on timeline orientation
-    // We position the huge year exactly on the timeline
-    const yearClasses = timelineOrientation === 'vertical-left'
-      ? 'absolute left-[230px] top-[480px] -translate-y-1/2 -translate-x-1/2'
-      : timelineOrientation === 'horizontal-top'
-        ? 'absolute top-[350px] left-1/2 -translate-x-1/2 -translate-y-1/2'
-        : 'absolute left-[800px] top-1/2 -translate-y-1/2 -translate-x-1/2';
-
-    const contentClasses = timelineOrientation === 'vertical-left'
-      ? 'absolute left-[450px] top-1/2 -translate-y-1/2 w-[calc(100%-500px)] flex items-center justify-between'
-      : timelineOrientation === 'horizontal-top'
-        ? 'absolute top-[450px] left-1/2 -translate-x-1/2 w-[800px] flex items-center justify-between'
-        : 'absolute right-[calc(100vw-650px)] top-1/2 -translate-y-1/2 w-[600px] flex items-center justify-between flex-row-reverse';
-
-    return (
-      <div className="absolute inset-0 pointer-events-none">
-
-        {/* MASSIVE YEAR EXACTLY ON THE TIMELINE */}
-        <motion.div
-          style={{ scale: yearScale, opacity: yearOpacity }}
-          className={`${yearClasses} z-10 flex items-center justify-center`}
-        >
-          <div className="relative flex flex-col">
-            {date && (
-              <div className="absolute -top-4 right-0 md:-top-6 md:-right-2 text-black text-sm md:text-base font-black tracking-[0.2em] uppercase z-20 whitespace-nowrap"
-                style={{ textShadow: '0 0 10px rgba(255,255,255,0.8), 0 2px 4px rgba(255,255,255,0.5)' }}>
-                {date}
-              </div>
-            )}
-            <div className="text-[80px] md:text-[120px] leading-none font-black tracking-[-6px] md:tracking-[-8px] italic relative z-10"
-              style={{
-                color: '#1a1a1a',
-                textShadow: '8px 8px 0px rgba(255,255,255,0.05), 15px 15px 30px rgba(0,0,0,1)',
-                WebkitTextStroke: '1px rgba(255, 255, 255, 0.9)',
-              }}
-            >
-              {year}
-            </div>
-            {yearSubtext && (
-              <div className="absolute -bottom-6 left-2 md:-bottom-8 md:left-4 text-[8px] md:text-[10px] text-gray-400 font-mono tracking-widest text-left leading-relaxed uppercase whitespace-pre-line z-20">
-                {yearSubtext}
-              </div>
-            )}
-          </div>
-        </motion.div>
-
-        {/* PROJECT DETAILS */}
-        <motion.div
-          style={{ x: contentX, opacity: contentOpacity }}
-          className={`${contentClasses} pointer-events-auto z-20 gap-12`}
-        >
-          {/* Text Content */}
-          <div className="flex-1 max-w-2xl">
-            <h3 className="text-5xl md:text-7xl font-black uppercase leading-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 tracking-tighter">{title}</h3>
-            <p className="text-base md:text-xl text-gray-400 font-light leading-relaxed mb-8 max-w-xl">
-              {desc}
-            </p>
-
-            <div className="mb-10">
-              <div className="text-[10px] text-gray-500 font-bold mb-4 uppercase tracking-widest">Tech Stack</div>
-              <div className="flex flex-wrap gap-3">
-                {tech.map((t, i) => (
-                  <span key={i} className="text-xs font-medium border border-white/10 bg-white/5 rounded-full px-5 py-2.5 text-gray-300 backdrop-blur-sm hover:bg-white/10 hover:border-white/30 transition-all cursor-default">{t}</span>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex items-center gap-6 pt-4">
-              <a href="#" className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.3)]">
-                <span className="relative z-10 flex items-center gap-2">
-                  View Demo <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-white opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </a>
-            </div>
-          </div>
-
-        </motion.div>
-      </div>
-    );
-  };
+  // Project 3 animations
+  const p3YearScale = useTransform(scrollYProgress, [0.55, 0.7, 1], [0.8, 1, 1]);
+  const p3YearOpacity = useTransform(scrollYProgress, [0.55, 0.7, 1], [0, 1, 1]);
+  const p3ContentX = useTransform(scrollYProgress, [0.55, 0.7, 1], ["100%", "0%", "0%"]);
+  const p3ContentOpacity = useTransform(scrollYProgress, [0.55, 0.7, 1], [0, 1, 1]);
 
   return (
-    <section ref={containerRef} className="relative bg-black text-white font-sans" style={{ height: '400vh' }} id="projects">
+    <section id="projects" ref={containerRef} className="relative w-full h-[400vh] bg-black font-sans">
+      
+      {/* Vercel Grid Background & Sticky Section Header */}
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden pointer-events-none">
+        
+        {/* Glowing Orbs Behind Grid */}
+        <motion.div
+          animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.25, 0.15] }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-[20%] right-[20%] w-[600px] h-[600px] bg-[#71d300] rounded-full blur-[200px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          className="absolute bottom-[10%] left-[10%] w-[500px] h-[500px] bg-violet-600 rounded-full blur-[200px]"
+        />
+        
+        {/* SVG Grid Overlay */}
+        <div 
+          className="absolute inset-0 z-0 opacity-20 mix-blend-overlay"
+          style={{
+            backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+            backgroundSize: `4rem 4rem`
+          }}
+        />
 
-      {/* PINNED VIEWPORT */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center bg-black">
-
-        {/* Subtle Grid Overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0"></div>
-
-        {/* Animated SVG Timeline Line */}
-        <div className="absolute inset-0 pointer-events-none z-10">
-          <svg className="w-full h-full" viewBox="0 0 1700 800" preserveAspectRatio="none">
-            <motion.path
-              d={pathData}
-              stroke="white"
-              strokeWidth="300"
-              fill="none"
-              style={{ pathLength }}
-            />
-          </svg>
+        <div className="absolute top-24 left-6 md:left-12 lg:left-24 z-30">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-8 h-px bg-white/20" />
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-white/50">
+              Selected Projects
+            </span>
+          </div>
         </div>
 
+      </div>
+
+      <div className="absolute top-0 left-0 w-full z-20">
+        
         {/* PROJECT 01 */}
         <ProjectBlock
-          num="01" date="15TH AUGUST" year="2024" yearSubtext={"LORUM IPSUM UDOR MES\nPOLAR DOMEQUE QIS"} title="Vanguard"
-          desc="A web-based platform developed to deliver efficient and user-focused digital solutions with a strong emphasis on functionality, performance, and user experience."
-          tech={["React.js", "Node.js", "MongoDB"]}
+          num="01" date="" year="2024" yearSubtext={"UI/UX\nPROTOTYPE"} title="Tech Sphere"
+          desc="Created and prototyped a contemporary tech-savvy website prioritizing simplicity, readability, and user interaction. The site featured dedicated pages for events, new media, and product exhibitions."
+          tech={["Figma", "UI/UX Design", "Prototyping"]}
           yearScale={p1YearScale} yearOpacity={p1YearOpacity} contentX={p1ContentX} contentOpacity={p1ContentOpacity}
           timelineOrientation="vertical-left"
         />
 
         {/* PROJECT 02 */}
         <ProjectBlock
-          num="02" date="03RD MAY" year="2023" yearSubtext={"TERMAINO ORLAND\nORQ DORAM JERA"} title="School ERP System"
-          desc="Features include Admin Dashboard, Teacher/Student/Parent Portals, Attendance, Examination & Marks Tracking, and Fee Management."
+          num="02" date="" year="2024" yearSubtext={"FULL-STACK\nWEB APP"} title="Athlixir Website"
+          desc="Created a complete-stack responsive web application for Athlixir, an actual-world solution to athlete performance management and sports event participation."
           tech={["React.js", "Tailwind CSS", "Node.js", "MongoDB"]}
           yearScale={p2YearScale} yearOpacity={p2YearOpacity} contentX={p2ContentX} contentOpacity={p2ContentOpacity}
           timelineOrientation="horizontal-top"
@@ -176,13 +164,13 @@ const Projects = () => {
 
         {/* PROJECT 03 */}
         <ProjectBlock
-          num="03" date="12TH NOVEMBER" year="2022" yearSubtext={"LORUM IPSUM UDOR MES\nPOLAR DOMEQUE QIS"} title="Billing Software"
-          desc="Features include Product Management, Invoice Generation, Customer Management, Payment Tracking, and Business Analytics."
-          tech={["MongoDB", "Express.js", "React.js", "Node.js"]}
+          num="03" date="" year="2023" yearSubtext={"MERN STACK\nAPPLICATION"} title="Billing Software"
+          desc="Developed a full-stack billing and invoicing system. Implemented secure authentication, product/service management, invoice generation, and real-time payment tracking."
+          tech={["MongoDB", "Express.js", "React.js", "Node.js", "Tailwind CSS"]}
           yearScale={p3YearScale} yearOpacity={p3YearOpacity} contentX={p3ContentX} contentOpacity={p3ContentOpacity}
           timelineOrientation="vertical-left"
         />
-
+        
       </div>
     </section>
   );
